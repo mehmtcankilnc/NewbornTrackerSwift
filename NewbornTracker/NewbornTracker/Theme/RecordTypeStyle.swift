@@ -27,3 +27,41 @@ extension RecordType {
         }
     }
 }
+
+extension RecordType {
+    var symbolName: String {
+        switch self {
+        case .poop: "leaf"
+        case .piss: "drop"
+        case .feed: "fork.knife"
+        case .sleep: "moon"
+        case .fever: "thermometer.medium"
+        case .medicine: "cross.case"
+        case .vitamin: "sun.max"
+        }
+    }
+
+    var title: LocalizedStringResource {
+        switch self {
+        case .poop: "Poop"
+        case .piss: "Pee"
+        case .feed: "Feed"
+        case .sleep: "Sleep"
+        case .fever: "Fever"
+        case .medicine: "Medicine"
+        case .vitamin: "Vitamin"
+        }
+    }
+
+    var question: LocalizedStringResource {
+        switch self {
+        case .poop: "When was the poop?"
+        case .piss: "When was the pee?"
+        case .feed: "When was the feed?"
+        case .sleep: "When did the sleep start?"
+        case .fever: "When was the temperature taken?"
+        case .medicine: "When was the medicine given?"
+        case .vitamin: "When was the vitamin given?"
+        }
+    }
+}
