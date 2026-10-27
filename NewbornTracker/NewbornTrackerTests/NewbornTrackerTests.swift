@@ -2,6 +2,8 @@ import Foundation
 import Testing
 import SwiftData
 import UserNotifications
+import UIKit
+import SwiftUI
 @testable import NewbornTracker
 
 private let calendar: Calendar = {
@@ -1401,5 +1403,669 @@ struct SleepNotificationCategoryTests {
         #expect(category.identifier == SleepNotification.categoryID)
         #expect(category.actions.map(\.identifier) == [SleepNotification.stopActionID])
         #expect(category.actions.first?.options.contains(.foreground) == false)
+    }
+}
+
+@MainActor
+struct ChartDataTests {
+    @Test func countsPerDayAndTypeWithOldestDayFirst() {
+        let records = [
+            RecordValue(type: .poop, occurredAt: date(2026, 3, 11, 8, 0)),
+            RecordValue(type: .poop, occurredAt: date(2026, 3, 10, 8, 0)),
+            RecordValue(type: .poop, occurredAt: date(2026, 3, 10, 20, 0)),
+            RecordValue(type: .feed, occurredAt: date(2026, 3, 10, 9, 0)),
+        ]
+
+        let points = ChartData.points(from: records, types: [.poop, .feed], calendar: calendar)
+
+        #expect(points.map(\.count) == [2, 1, 1, 0])
+        #expect(points.map(\.type) == [.poop, .feed, .poop, .feed])
+        #expect(points[0].day == calendar.startOfDay(for: date(2026, 3, 10)))
+        #expect(points[2].day == calendar.startOfDay(for: date(2026, 3, 11)))
+    }
+
+    @Test func sleepCountsSessionsNotMinutes() {
+        let records = [
+            RecordValue(type: .sleep, occurredAt: date(2026, 3, 10, 1, 0), durationMinutes: 240),
+            RecordValue(type: .sleep, occurredAt: date(2026, 3, 10, 13, 0), durationMinutes: 30),
+        ]
+
+        let points = ChartData.points(from: records, types: [.sleep], calendar: calendar)
+
+        #expect(points.map(\.count) == [2])
+    }
+
+    @Test func noRecordsGivesNoPoints() {
+        let points = ChartData.points(from: [RecordValue](), types: RecordType.primary, calendar: calendar)
+
+        #expect(points.isEmpty)
+    }
+
+    @Test func chartTypesFollowTheFilter() {
+        #expect(ChartData.types(for: RecordFilter()) == RecordType.primary)
+
+        var filter = RecordFilter()
+        filter.types = [.fever, .sleep]
+        #expect(ChartData.types(for: filter) == [.sleep, .fever])
+    }
+}
+
+private func isClose(_ value: Double?, _ expected: Double, tolerance: Double = 0.001) -> Bool {
+    guard let value else { return false }
+    return abs(value - expected) <= tolerance
+}
+
+@MainActor
+struct WhoPercentilesTests {
+    @Test func medianAtBirthIsTheTableMedian() {
+        let boys = WhoPercentiles.value(for: .weight, gender: .male, months: 0, percentile: .p50)
+        let girls = WhoPercentiles.value(for: .weight, gender: .female, months: 0, percentile: .p50)
+
+        #expect(isClose(boys, 3.3464, tolerance: 0.0001))
+        #expect(isClose(girls, 3.2322, tolerance: 0.0001))
+    }
+
+    @Test func extremePercentilesAtBirthMatchTheWhoChart() {
+        let p3 = WhoPercentiles.value(for: .weight, gender: .male, months: 0, percentile: .p3)
+        let p97 = WhoPercentiles.value(for: .weight, gender: .male, months: 0, percentile: .p97)
+
+        #expect(isClose(p3, 2.5073))
+        #expect(isClose(p97, 4.3499))
+    }
+
+    @Test func valuesBetweenTableRowsAreInterpolated() {
+        let median = WhoPercentiles.value(for: .weight, gender: .male, months: 1.5, percentile: .p50)
+        let p97 = WhoPercentiles.value(for: .weight, gender: .male, months: 1.5, percentile: .p97)
+
+        #expect(isClose(median, 5.0192, tolerance: 0.0001))
+        #expect(isClose(p97, 6.3576))
+    }
+
+    @Test func zeroSkewnessUsesTheExponentialFormula() {
+        let value = WhoPercentiles.value(l: 0, m: 10, s: 0.1, z: 1)
+
+        #expect(isClose(value, 11.0517))
+    }
+
+    @Test func ageOutsideTheTableHasNoValue() {
+        #expect(WhoPercentiles.value(for: .weight, gender: .male, months: 24, percentile: .p50) != nil)
+        #expect(WhoPercentiles.value(for: .weight, gender: .male, months: 24.5, percentile: .p50) == nil)
+        #expect(WhoPercentiles.value(for: .weight, gender: .male, months: -1, percentile: .p50) == nil)
+    }
+
+    @Test func percentilesAreOrderedForEveryMetricAndGender() {
+        for metric in GrowthMetric.allCases {
+            for gender in Gender.allCases {
+                let values = Percentile.allCases.compactMap {
+                    WhoPercentiles.value(for: metric, gender: gender, months: 6, percentile: $0)
+                }
+                #expect(values.count == 5)
+                #expect(values == values.sorted())
+            }
+        }
+    }
+
+    @Test func tableIsCompleteAndSortedByAge() {
+        for metric in GrowthMetric.allCases {
+            for gender in Gender.allCases {
+                let months = (WhoGrowthStandards.table[metric]?[gender] ?? []).map(\.months)
+                #expect(months.count == 11)
+                #expect(months.first == 0)
+                #expect(months.last == 24)
+                #expect(months == months.sorted())
+            }
+        }
+    }
+}
+
+@MainActor
+struct GrowthAgeTests {
+    @Test func countsFractionalMonthsFromBirth() {
+        let months = GrowthAge.months(from: date(2026, 1, 1), to: date(2026, 3, 1))
+
+        #expect(isClose(months, 59 / 30.4375))
+        #expect(GrowthAge.months(from: date(2026, 1, 1), to: date(2026, 1, 1)) == 0)
+    }
+
+    @Test func dateBeforeBirthCountsAsZero() {
+        let months = GrowthAge.months(from: date(2026, 1, 10), to: date(2026, 1, 1))
+
+        #expect(months == 0)
+    }
+
+    @Test func metricReadsItsOwnValueFromAMeasurement() {
+        let measurement = GrowthMeasurement(date: date(2026, 2, 1), weightKg: 4.2, heightCm: nil, headCircumferenceCm: 36)
+
+        #expect(GrowthMetric.weight.value(in: measurement) == 4.2)
+        #expect(GrowthMetric.height.value(in: measurement) == nil)
+        #expect(GrowthMetric.headCircumference.value(in: measurement) == 36)
+    }
+}
+
+@MainActor
+struct GrowthEntryInputTests {
+    @Test func acceptsCommaAndDotDecimals() {
+        var input = GrowthEntryInput(date: date(2026, 2, 1))
+        input.weightText = "4,25"
+        input.heightText = " 54.5 "
+
+        #expect(input.weightKg == 4.25)
+        #expect(input.heightCm == 54.5)
+        #expect(input.headCircumferenceCm == nil)
+    }
+
+    @Test func rejectsBlankZeroNegativeAndGarbage() {
+        for text in ["", "   ", "0", "-3", "abc", "nan"] {
+            var input = GrowthEntryInput(date: date(2026, 2, 1))
+            input.weightText = text
+
+            #expect(input.weightKg == nil)
+        }
+    }
+
+    @Test func needsAtLeastOneValueToSave() {
+        var input = GrowthEntryInput(date: date(2026, 2, 1))
+        #expect(input.canSave == false)
+        #expect(input.makeMeasurement() == nil)
+
+        input.headText = "35"
+        let measurement = input.makeMeasurement()
+
+        #expect(input.canSave)
+        #expect(measurement?.headCircumferenceCm == 35)
+        #expect(measurement?.weightKg == nil)
+    }
+
+    @Test func editFormStartsWithTheSavedValues() {
+        let saved = GrowthMeasurement(date: date(2026, 2, 1), weightKg: 4.2, heightCm: nil, headCircumferenceCm: 36)
+        let input = GrowthEntryInput(saved)
+
+        #expect(input.weightText == "4.2")
+        #expect(input.heightText == "")
+        #expect(input.headText == "36.0")
+        #expect(input.date == date(2026, 2, 1))
+    }
+
+    @Test func applyOverwritesAllThreeValues() {
+        let saved = GrowthMeasurement(date: date(2026, 2, 1), weightKg: 4, heightCm: 54, headCircumferenceCm: nil)
+        var input = GrowthEntryInput(saved)
+        input.weightText = ""
+        input.headText = "36"
+
+        input.apply(to: saved)
+
+        #expect(saved.weightKg == nil)
+        #expect(saved.heightCm == 54)
+        #expect(saved.headCircumferenceCm == 36)
+    }
+}
+
+@MainActor
+struct GrowthSeriesTests {
+    @Test func pointsAreOrderedByAgeAndSkipMissingValues() {
+        let birth = date(2026, 1, 1)
+        let later = GrowthMeasurement(date: date(2026, 4, 1), weightKg: 6, heightCm: 62)
+        let earlier = GrowthMeasurement(date: date(2026, 2, 1), weightKg: 4.2)
+
+        let weights = GrowthSeries.points(from: [later, earlier], metric: .weight, birthDate: birth)
+        let heights = GrowthSeries.points(from: [later, earlier], metric: .height, birthDate: birth)
+
+        #expect(weights.map(\.value) == [4.2, 6])
+        #expect(weights[0].months < weights[1].months)
+        #expect(heights.map(\.value) == [62])
+    }
+
+    @Test func percentileLinesCoverEveryMonthOfTheTable() {
+        let lines = GrowthSeries.percentileLines(metric: .weight, gender: .male)
+        let median = lines.filter { $0.percentile == .p50 }
+
+        #expect(lines.count == 5 * 25)
+        #expect(median.first?.months == 0)
+        #expect(median.last?.months == 24)
+        #expect(isClose(median.first?.value, 3.3464, tolerance: 0.0001))
+    }
+}
+
+@MainActor
+struct ChecklistTests {
+    @Test func builtInScheduleIDsAreUnique() {
+        let vaccineIDs = VaccineSchedule.items.map(\.id)
+        let milestoneIDs = MilestoneSchedule.items.map(\.id)
+
+        #expect(vaccineIDs.count == 20)
+        #expect(Set(vaccineIDs).count == vaccineIDs.count)
+        #expect(milestoneIDs.count == 12)
+        #expect(Set(milestoneIDs).count == milestoneIDs.count)
+    }
+
+    @Test func vaccineRowsListCustomVaccinesFirstThenTheSchedule() {
+        let older = CustomVaccine(name: "Flu shot", ageLabel: "Every autumn")
+        older.createdAt = date(2026, 1, 1)
+        let newer = CustomVaccine(name: "Rotavirus", isCompleted: true)
+        newer.createdAt = date(2026, 2, 1)
+
+        let rows = VaccineChecklist.rows(completedIDs: ["bcg-2m"], customVaccines: [newer, older])
+
+        #expect(rows.count == 22)
+        #expect(rows.prefix(2).map(\.name) == ["Flu shot", "Rotavirus"])
+        #expect(rows[0].ageLabel == "Every autumn")
+        #expect(rows[1].ageLabel == "")
+        #expect(rows[1].isDone)
+        #expect(rows.first { $0.source == .scheduled("bcg-2m") }?.isDone == true)
+        #expect(rows.first { $0.source == .scheduled("hepb-birth") }?.isDone == false)
+    }
+
+    @Test func vaccineProgressCountsDoneRows() {
+        let rows = VaccineChecklist.rows(completedIDs: ["bcg-2m", "kpa-2m"], customVaccines: [])
+        let progress = VaccineChecklist.progress(of: rows)
+
+        #expect(progress.done == 2)
+        #expect(progress.total == 20)
+    }
+
+    @Test func togglingAScheduledVaccineMarksAndUnmarksIt() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let baby = Baby(name: "Ada")
+        context.insert(baby)
+
+        context.toggleVaccine(.scheduled("bcg-2m"), for: baby)
+        try context.save()
+        let marked = try ModelContext(container).fetch(FetchDescriptor<VaccineCompletion>())
+        #expect(marked.map(\.scheduleID) == ["bcg-2m"])
+
+        context.toggleVaccine(.scheduled("bcg-2m"), for: baby)
+        try context.save()
+        let unmarked = try ModelContext(container).fetch(FetchDescriptor<VaccineCompletion>())
+        #expect(unmarked.isEmpty)
+    }
+
+    @Test func togglingACustomVaccineFlipsItsFlag() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let baby = Baby(name: "Ada")
+        let vaccine = CustomVaccine(name: "Flu shot")
+        context.insert(baby)
+        context.insert(vaccine)
+        vaccine.baby = baby
+
+        context.toggleVaccine(.custom(vaccine.id), for: baby)
+        #expect(vaccine.isCompleted)
+
+        context.toggleVaccine(.custom(vaccine.id), for: baby)
+        #expect(vaccine.isCompleted == false)
+    }
+
+    @Test func milestoneRowsCarryTheirJournalEntry() {
+        let log = MilestoneLog(achievedAt: date(2026, 3, 1), note: "Big grin", photoFileName: nil)
+        let entry = MilestoneEntry(scheduleID: "first-smile", log: log)
+        let custom = CustomMilestone(name: "First laugh")
+
+        let rows = MilestoneChecklist.rows(entries: [entry], customMilestones: [custom])
+
+        #expect(rows.count == 13)
+        #expect(rows[0].name == "First laugh")
+        #expect(rows[0].isDone == false)
+        #expect(rows.first { $0.source == .scheduled("first-smile") }?.log == log)
+        #expect(rows.first { $0.source == .scheduled("crawling") }?.isDone == false)
+    }
+
+    @Test func duplicateEntriesForOneMilestoneDoNotCrash() {
+        let first = MilestoneLog(achievedAt: date(2026, 3, 1), note: nil, photoFileName: nil)
+        let second = MilestoneLog(achievedAt: date(2026, 3, 2), note: nil, photoFileName: nil)
+        let entries = [
+            MilestoneEntry(scheduleID: "crawling", log: first),
+            MilestoneEntry(scheduleID: "crawling", log: second),
+        ]
+
+        let rows = MilestoneChecklist.rows(entries: entries, customMilestones: [])
+
+        #expect(rows.first { $0.source == .scheduled("crawling") }?.log == second)
+    }
+
+    @Test func savingAMilestoneTwiceUpdatesTheSameEntry() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let baby = Baby(name: "Ada")
+        context.insert(baby)
+        let first = MilestoneLog(achievedAt: date(2026, 3, 1), note: nil, photoFileName: nil)
+        let second = MilestoneLog(achievedAt: date(2026, 3, 5), note: "Again", photoFileName: "a.jpg")
+
+        context.saveMilestone(first, for: .scheduled("crawling"), baby: baby)
+        context.saveMilestone(second, for: .scheduled("crawling"), baby: baby)
+        try context.save()
+
+        let entries = try ModelContext(container).fetch(FetchDescriptor<MilestoneEntry>())
+        #expect(entries.count == 1)
+        #expect(entries.first?.log == second)
+    }
+
+    @Test func clearingAScheduledMilestoneRemovesItsEntry() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let baby = Baby(name: "Ada")
+        context.insert(baby)
+        let log = MilestoneLog(achievedAt: date(2026, 3, 1), note: nil, photoFileName: nil)
+        context.saveMilestone(log, for: .scheduled("crawling"), baby: baby)
+
+        context.clearMilestone(.scheduled("crawling"), baby: baby)
+        try context.save()
+
+        #expect(try ModelContext(container).fetch(FetchDescriptor<MilestoneEntry>()).isEmpty)
+    }
+
+    @Test func clearingACustomMilestoneKeepsItInTheList() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let baby = Baby(name: "Ada")
+        let milestone = CustomMilestone(name: "First laugh")
+        context.insert(baby)
+        context.insert(milestone)
+        milestone.baby = baby
+        let log = MilestoneLog(achievedAt: date(2026, 3, 1), note: nil, photoFileName: nil)
+
+        context.saveMilestone(log, for: .custom(milestone.id), baby: baby)
+        #expect(milestone.log == log)
+
+        context.clearMilestone(.custom(milestone.id), baby: baby)
+        #expect(milestone.log == nil)
+        #expect(baby.customMilestones.count == 1)
+    }
+}
+
+@MainActor
+struct CustomItemInputTests {
+    @Test func trimsTheNameAndTurnsABlankAgeIntoNil() {
+        var input = CustomItemInput()
+        input.name = "  Flu shot "
+        input.ageText = "   "
+
+        #expect(input.trimmedName == "Flu shot")
+        #expect(input.ageLabel == nil)
+
+        input.ageText = " Every autumn "
+        #expect(input.ageLabel == "Every autumn")
+    }
+
+    @Test func needsANameToSave() {
+        var input = CustomItemInput()
+        #expect(input.canSave == false)
+        #expect(input.makeVaccine() == nil)
+        #expect(input.makeMilestone() == nil)
+
+        input.name = "First laugh"
+        #expect(input.canSave)
+        #expect(input.makeMilestone()?.name == "First laugh")
+        #expect(input.makeVaccine()?.isCompleted == false)
+    }
+
+    @Test func applyOverwritesNameAndAge() {
+        let vaccine = CustomVaccine(name: "Flu", ageLabel: "Autumn")
+        var input = CustomItemInput(name: vaccine.name, ageLabel: vaccine.ageLabel)
+        input.name = "Flu shot"
+        input.ageText = ""
+
+        input.apply(to: vaccine)
+
+        #expect(vaccine.name == "Flu shot")
+        #expect(vaccine.ageLabel == nil)
+    }
+}
+
+@MainActor
+struct PhotoStorageTests {
+    private func makeStorage() -> PhotoStorage {
+        PhotoStorage(directory: FileManager.default.temporaryDirectory.appending(path: UUID().uuidString, directoryHint: .isDirectory))
+    }
+
+    private func pngData(width: CGFloat, height: CGFloat) -> Data {
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = 1
+        return UIGraphicsImageRenderer(size: CGSize(width: width, height: height), format: format)
+            .pngData { context in
+                UIColor.systemTeal.setFill()
+                context.fill(CGRect(x: 0, y: 0, width: width, height: height))
+            }
+    }
+
+    @Test func savesAShrunkJPEGAndReturnsOnlyTheFileName() throws {
+        let storage = makeStorage()
+
+        let fileName = try storage.save(imageData: pngData(width: 3000, height: 2000))
+        let saved = storage.image(named: fileName)
+
+        #expect(fileName.hasSuffix(".jpg"))
+        #expect(!fileName.contains("/"))
+        #expect(saved?.size == CGSize(width: 1600, height: 1067))
+    }
+
+    @Test func smallPicturesAreNotEnlarged() throws {
+        let storage = makeStorage()
+
+        let fileName = try storage.save(imageData: pngData(width: 400, height: 300))
+
+        #expect(storage.image(named: fileName)?.size == CGSize(width: 400, height: 300))
+    }
+
+    @Test func dataThatIsNotAnImageIsRejected() {
+        let storage = makeStorage()
+
+        #expect(throws: PhotoStorageError.self) {
+            try storage.save(imageData: Data("not an image".utf8))
+        }
+    }
+
+    @Test func deleteRemovesTheFileAndIgnoresMissingOnes() throws {
+        let storage = makeStorage()
+        let fileName = try storage.save(imageData: pngData(width: 100, height: 100))
+
+        storage.delete(fileName)
+        #expect(storage.image(named: fileName) == nil)
+
+        storage.delete(fileName)
+        storage.delete(nil)
+    }
+}
+
+@MainActor
+struct MilestoneInputTests {
+    private func savedLog(photo: String? = "old.jpg") -> MilestoneLog {
+        MilestoneLog(achievedAt: date(2026, 3, 1), note: "Big grin", photoFileName: photo)
+    }
+
+    @Test func aNewFormIsEmptyAndTurnsABlankNoteIntoNil() {
+        var input = MilestoneInput(now: date(2026, 3, 1))
+        input.noteText = "   "
+
+        #expect(input.photoFileName == nil)
+        #expect(input.note == nil)
+        #expect(input.log == MilestoneLog(achievedAt: date(2026, 3, 1), note: nil, photoFileName: nil))
+    }
+
+    @Test func anEditFormStartsWithTheSavedEntry() {
+        let input = MilestoneInput(savedLog())
+
+        #expect(input.noteText == "Big grin")
+        #expect(input.photoFileName == "old.jpg")
+        #expect(input.log == savedLog())
+    }
+
+    @Test func replacingTheSavedPhotoKeepsItUntilSave() {
+        var input = MilestoneInput(savedLog())
+
+        let deleteNow = input.setPhoto("new.jpg")
+
+        #expect(deleteNow == nil)
+        #expect(input.photosToDeleteOnSave == ["old.jpg"])
+        #expect(input.photoToDeleteOnCancel == "new.jpg")
+    }
+
+    @Test func pickingASecondNewPhotoDeletesTheFirstOneRightAway() {
+        var input = MilestoneInput(savedLog())
+        _ = input.setPhoto("first-new.jpg")
+
+        let deleteNow = input.setPhoto("second-new.jpg")
+
+        #expect(deleteNow == "first-new.jpg")
+        #expect(input.photoToDeleteOnCancel == "second-new.jpg")
+    }
+
+    @Test func removingTheSavedPhotoDeletesItOnSaveOnly() {
+        var input = MilestoneInput(savedLog())
+
+        let deleteNow = input.setPhoto(nil)
+
+        #expect(deleteNow == nil)
+        #expect(input.photosToDeleteOnSave == ["old.jpg"])
+        #expect(input.photoToDeleteOnCancel == nil)
+    }
+
+    @Test func anUntouchedFormDeletesNothing() {
+        let input = MilestoneInput(savedLog())
+
+        #expect(input.photosToDeleteOnSave.isEmpty)
+        #expect(input.photoToDeleteOnCancel == nil)
+    }
+}
+
+@MainActor
+struct SettingsLogicTests {
+    @Test func appearanceModesMapToColorSchemes() {
+        #expect(AppearanceMode.system.colorScheme == nil)
+        #expect(AppearanceMode.light.colorScheme == .light)
+        #expect(AppearanceMode.dark.colorScheme == .dark)
+        #expect(AppearanceMode(rawValue: "dark") == .dark)
+        #expect(AppearanceMode(rawValue: "unknown") == nil)
+    }
+
+    @Test func editFormStartsWithTheSavedProfileAndWritesItBack() {
+        let baby = Baby(name: "Ada", birthDate: date(2026, 1, 5), gender: .female)
+        var input = BabyInput(baby)
+        #expect(input.name == "Ada")
+        #expect(input.hasBirthDate)
+        #expect(input.birthDate == date(2026, 1, 5))
+        #expect(input.gender == .female)
+
+        input.name = "  Ada Lou "
+        input.hasBirthDate = false
+        input.gender = nil
+        input.apply(to: baby)
+
+        #expect(baby.name == "Ada Lou")
+        #expect(baby.birthDate == nil)
+        #expect(baby.gender == nil)
+    }
+
+    @Test func aBlankNameIsNeverWrittenBack() {
+        let baby = Baby(name: "Ada")
+        var input = BabyInput(baby)
+        input.name = "   "
+
+        input.apply(to: baby)
+
+        #expect(baby.name == "Ada")
+    }
+
+    @Test func onboardingWalksThroughTheIntroThenAsksForAName() {
+        var flow = OnboardingFlow()
+        #expect(flow.stepCount == 4)
+        #expect(flow.isIntro)
+
+        flow.next()
+        flow.next()
+        #expect(flow.isIntro)
+        flow.next()
+        #expect(flow.isIntro == false)
+
+        flow.next()
+        #expect(flow.step == 3)
+    }
+
+    @Test func skippingJumpsToTheNameStep() {
+        var flow = OnboardingFlow()
+
+        flow.skip()
+
+        #expect(flow.step == 3)
+        #expect(flow.isIntro == false)
+    }
+
+    @Test func onboardingNeedsTheNameStepAndANameToFinish() {
+        var flow = OnboardingFlow()
+        flow.baby.name = "Ada"
+        #expect(flow.canFinish == false)
+        #expect(flow.makeBaby() == nil)
+
+        flow.skip()
+        #expect(flow.makeBaby()?.name == "Ada")
+
+        flow.baby.name = "  "
+        #expect(flow.canFinish == false)
+        #expect(flow.makeBaby() == nil)
+    }
+
+    @Test func deletingABabyRemovesItsDataAndPhotos() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let photos = PhotoStorage(directory: FileManager.default.temporaryDirectory.appending(path: UUID().uuidString, directoryHint: .isDirectory))
+        let ada = Baby(name: "Ada")
+        let bob = Baby(name: "Bob")
+        context.insert(ada)
+        context.insert(bob)
+        let record = BabyRecord(type: .poop, occurredAt: date(2026, 3, 1))
+        context.insert(record)
+        record.baby = ada
+        let fileName = try photos.save(imageData: UIImage(systemName: "heart")!.pngData()!)
+        let entry = MilestoneEntry(scheduleID: "crawling", log: MilestoneLog(achievedAt: date(2026, 3, 1), note: nil, photoFileName: fileName))
+        context.insert(entry)
+        entry.baby = ada
+        try context.save()
+
+        let deleted = context.deleteBaby(ada, among: [ada, bob], photos: photos)
+        try context.save()
+
+        let fresh = ModelContext(container)
+        #expect(deleted)
+        #expect(try fresh.fetch(FetchDescriptor<Baby>()).map(\.name) == ["Bob"])
+        #expect(try fresh.fetch(FetchDescriptor<BabyRecord>()).isEmpty)
+        #expect(try fresh.fetch(FetchDescriptor<MilestoneEntry>()).isEmpty)
+        #expect(photos.image(named: fileName) == nil)
+    }
+
+    @Test func theLastBabyCannotBeDeleted() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let ada = Baby(name: "Ada")
+        context.insert(ada)
+
+        let deleted = context.deleteBaby(ada, among: [ada])
+        try context.save()
+
+        #expect(deleted == false)
+        #expect(try ModelContext(container).fetch(FetchDescriptor<Baby>()).count == 1)
+    }
+
+    @Test func deletingAllRecordsKeepsTheRestOfTheProfile() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let ada = Baby(name: "Ada")
+        context.insert(ada)
+        let record = BabyRecord(type: .feed, occurredAt: date(2026, 3, 1))
+        context.insert(record)
+        record.baby = ada
+        let growth = GrowthMeasurement(date: date(2026, 3, 1), weightKg: 4)
+        context.insert(growth)
+        growth.baby = ada
+        ada.activeSleep = ActiveSleep(startedAt: date(2026, 3, 1), notificationID: "n")
+        try context.save()
+
+        context.deleteAllRecords(of: ada)
+        try context.save()
+
+        let fresh = ModelContext(container)
+        #expect(try fresh.fetch(FetchDescriptor<BabyRecord>()).isEmpty)
+        #expect(try fresh.fetch(FetchDescriptor<GrowthMeasurement>()).count == 1)
+        let savedAda = try #require(try fresh.fetch(FetchDescriptor<Baby>()).first)
+        #expect(savedAda.activeSleep == nil)
     }
 }

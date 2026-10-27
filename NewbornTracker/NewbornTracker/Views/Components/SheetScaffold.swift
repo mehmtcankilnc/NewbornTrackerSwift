@@ -4,6 +4,8 @@ import SwiftUI
 /// Content taller than the screen scrolls.
 struct SheetScaffold<Content: View>: View {
     let title: LocalizedStringResource
+    /// Use for a sheet whose content changes size after it opens (a photo appears, a text field grows).
+    var fixedHeight: CGFloat?
     @ViewBuilder let content: Content
 
     @State private var contentHeight: CGFloat = 420
@@ -24,7 +26,7 @@ struct SheetScaffold<Content: View>: View {
         }
         .scrollBounceBehavior(.basedOnSize)
         .scrollDismissesKeyboard(.interactively)
-        .presentationDetents([.height(contentHeight)])
+        .presentationDetents([.height(fixedHeight ?? contentHeight)])
         .presentationDragIndicator(.visible)
         .presentationBackground(Color.appSurfaceOverlay)
     }

@@ -7,6 +7,7 @@ final class CustomVaccine {
     var name: String
     var ageLabel: String?
     var isCompleted: Bool
+    var createdAt: Date = Date.now
     var baby: Baby?
 
     init(name: String, ageLabel: String? = nil, isCompleted: Bool = false) {

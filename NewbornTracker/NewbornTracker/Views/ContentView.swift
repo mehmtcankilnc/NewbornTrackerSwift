@@ -17,7 +17,7 @@ struct ContentView: View {
                 RecordsView { selectedTab = .home }
             }
             Tab("Growth", systemImage: "chart.line.uptrend.xyaxis", value: AppTab.growth) {
-                Text("Growth")
+                GrowthView()
             }
         }
         .tint(Color.appPrimary)

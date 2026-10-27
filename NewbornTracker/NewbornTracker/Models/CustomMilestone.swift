@@ -8,6 +8,7 @@ final class CustomMilestone {
     var ageLabel: String?
     /// nil until the milestone is achieved.
     var log: MilestoneLog?
+    var createdAt: Date = Date.now
     var baby: Baby?
 
     init(name: String, ageLabel: String? = nil, log: MilestoneLog? = nil) {

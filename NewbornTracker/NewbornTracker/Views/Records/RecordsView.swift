@@ -3,10 +3,10 @@ import SwiftUI
 
 struct RecordsView: View {
     let onGoHome: () -> Void
-
+    
     @Query(sort: \Baby.createdAt) private var babies: [Baby]
     @Environment(ActiveBabyStore.self) private var activeBabyStore
-
+    
     var body: some View {
         Group {
             if let baby = activeBabyStore.activeBaby(in: babies) {
@@ -20,12 +20,17 @@ struct RecordsView: View {
     }
 }
 
+private enum RecordsDisplay {
+    case list
+    case chart
+}
+
 private enum RecordsSheet: Identifiable {
     case types
     case period
     case customRange
     case edit(BabyRecord)
-
+    
     var id: String {
         switch self {
         case .types: "types"
@@ -39,31 +44,38 @@ private enum RecordsSheet: Identifiable {
 private struct RecordsContent: View {
     let baby: Baby
     let onGoHome: () -> Void
-
+    
     @Environment(\.modelContext) private var context
     @Query private var records: [BabyRecord]
     @State private var filter = RecordFilter()
     @State private var sheet: RecordsSheet?
     @State private var recordToDelete: BabyRecord?
-
+    @State private var display: RecordsDisplay = .list
+    
     init(baby: Baby, onGoHome: @escaping () -> Void) {
         self.baby = baby
         self.onGoHome = onGoHome
         let babyID = baby.id
         _records = Query(filter: #Predicate<BabyRecord> { $0.baby?.id == babyID })
     }
-
+    
     var body: some View {
         let filtered = filter.apply(to: records)
         let emptyState = RecordsEmptyState(totalCount: records.count, filteredCount: filtered.count)
-
+        
         VStack(alignment: .leading, spacing: 0) {
             filterBar
                 .padding(.horizontal, 20)
                 .padding(.top, 16)
-
+            
             if let emptyState {
                 emptyView(emptyState)
+            } else if display == .chart {
+                RecordsChart(
+                    points: ChartData.points(from: filtered, types: ChartData.types(for: filter)),
+                    types: ChartData.types(for: filter)
+                )
+                Spacer(minLength: 0)
             } else {
                 recordList(DayGrouper.group(filtered))
             }
@@ -85,13 +97,13 @@ private struct RecordsContent: View {
             Text("This \(String(localized: record.type.title).lowercased()) record will be deleted.")
         }
     }
-
+    
     private var filterBar: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Records")
                 .font(.system(size: 24, weight: .heavy))
                 .foregroundStyle(Color.appInk)
-
+            
             HStack(spacing: 8) {
                 FilterTrigger(symbol: "line.3.horizontal.decrease", title: typeFilterTitle, isActive: !filter.types.isEmpty) {
                     sheet = .types
@@ -99,8 +111,15 @@ private struct RecordsContent: View {
                 FilterTrigger(symbol: "calendar", title: periodTitle) {
                     sheet = .period
                 }
+                Spacer(minLength: 0)
+                Picker("View", selection: $display) {
+                    Image(systemName: "list.bullet").tag(RecordsDisplay.list)
+                    Image(systemName: "chart.bar.fill").tag(RecordsDisplay.chart)
+                }
+                .pickerStyle(.segmented)
+                .frame(width: 96)
             }
-
+            
             if !filter.types.isEmpty {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 6) {
@@ -114,7 +133,7 @@ private struct RecordsContent: View {
             }
         }
     }
-
+    
     private var typeFilterTitle: String {
         let selected = RecordType.allCases.filter(filter.types.contains)
         switch selected.count {
@@ -123,7 +142,7 @@ private struct RecordsContent: View {
         default: return String(localized: "\(selected.count) types selected")
         }
     }
-
+    
     private var periodTitle: String {
         if case .custom(let from, let to) = filter.period {
             let format = Date.FormatStyle().day().month(.abbreviated)
@@ -131,7 +150,7 @@ private struct RecordsContent: View {
         }
         return String(localized: filter.period.title)
     }
-
+    
     private func recordList(_ sections: [DaySection<BabyRecord>]) -> some View {
         List {
             ForEach(sections) { section in
@@ -169,7 +188,7 @@ private struct RecordsContent: View {
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
     }
-
+    
     private func dayHeader(for section: DaySection<BabyRecord>) -> some View {
         HStack(alignment: .firstTextBaseline) {
             Text(headingText(for: section.day))
@@ -185,7 +204,7 @@ private struct RecordsContent: View {
         .padding(.top, 8)
         .listRowInsets(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
     }
-
+    
     private func headingText(for day: Date) -> String {
         switch DayGrouper.heading(for: day) {
         case .today: String(localized: "Today")
@@ -193,7 +212,7 @@ private struct RecordsContent: View {
         case .date(let date): date.formatted(.dateTime.day().month(.wide).weekday(.wide))
         }
     }
-
+    
     private func summaryText(_ summary: DaySummary) -> String? {
         switch summary {
         case .none:
@@ -208,7 +227,7 @@ private struct RecordsContent: View {
             return parts.joined(separator: " · ")
         }
     }
-
+    
     private func emptyView(_ state: RecordsEmptyState) -> some View {
         VStack(spacing: 6) {
             Text(state == .noRecords ? "No records yet" : "No records match these filters")
@@ -218,9 +237,9 @@ private struct RecordsContent: View {
             Text(state == .noRecords
                  ? "It'll show up here once you log a poop, pee, feed, or sleep from Home."
                  : "Try a different filter or clear them.")
-                .font(.system(size: 14))
-                .foregroundStyle(Color.appMuted)
-                .multilineTextAlignment(.center)
+            .font(.system(size: 14))
+            .foregroundStyle(Color.appMuted)
+            .multilineTextAlignment(.center)
             if state == .noRecords {
                 PillButton(title: "Go to Home", action: onGoHome)
                     .padding(.horizontal, 60)
@@ -231,7 +250,7 @@ private struct RecordsContent: View {
         .padding(.top, 64)
         .frame(maxWidth: .infinity)
     }
-
+    
     @ViewBuilder
     private func sheetContent(for sheet: RecordsSheet) -> some View {
         switch sheet {
@@ -264,12 +283,12 @@ private struct RecordsContent: View {
             }
         }
     }
-
+    
     private var customStart: Date {
         if case .custom(let from, _) = filter.period { return from }
         return .now
     }
-
+    
     private var customEnd: Date {
         if case .custom(_, let to) = filter.period { return to }
         return .now

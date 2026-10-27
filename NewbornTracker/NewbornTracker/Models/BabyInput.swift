@@ -22,4 +22,25 @@ struct BabyInput: Equatable {
             createdAt: createdAt
         )
     }
+    
+    /// Writes the form back to a saved baby. Does nothing while the name is blank.
+    func apply(to baby: Baby) {
+        guard canSave else { return }
+        baby.name = trimmedName
+        baby.birthDate = hasBirthDate ? birthDate : nil
+        baby.gender = gender
+    }
+}
+
+extension BabyInput {
+    /// An edit form that starts with the saved profile.
+    /// It lives in an extension so the struct keeps its automatic memberwise initializer.
+    init(_ baby: Baby) {
+        self.init(
+            name: baby.name,
+            hasBirthDate: baby.birthDate != nil,
+            birthDate: baby.birthDate ?? .now,
+            gender: baby.gender
+        )
+    }
 }

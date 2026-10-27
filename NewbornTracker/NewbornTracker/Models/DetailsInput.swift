@@ -37,13 +37,7 @@ struct HealthDetailsInput: Equatable {
     var temperatureText = ""
     var noteText = ""
 
-    var temperatureC: Double? {
-        let normalized = temperatureText
-            .replacingOccurrences(of: ",", with: ".")
-            .trimmingCharacters(in: .whitespaces)
-        guard let value = Double(normalized), value.isFinite, value > 0 else { return nil }
-        return value
-    }
+    var temperatureC: Double? { DecimalText.positiveValue(temperatureText) }
 
     var note: String? {
         let trimmed = noteText.trimmingCharacters(in: .whitespacesAndNewlines)
