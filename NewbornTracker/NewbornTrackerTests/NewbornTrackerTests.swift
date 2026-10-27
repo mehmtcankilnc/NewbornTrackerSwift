@@ -1070,3 +1070,167 @@ struct BabyInputTests {
         #expect(BabyInput(name: "Ada", gender: .female).makeBaby()?.gender == .female)
     }
 }
+
+@MainActor
+struct RecordFilterToggleTests {
+    @Test func togglingAddsAndRemovesTypes() {
+        var filter = RecordFilter()
+
+        filter.toggleType(.feed)
+        #expect(filter.types == [.feed])
+
+        filter.toggleType(.poop)
+        #expect(filter.types == [.feed, .poop])
+
+        filter.toggleType(.feed)
+        #expect(filter.types == [.poop])
+    }
+
+    @Test func selectingTheLastRemainingTypeClearsTheSelection() {
+        var filter = RecordFilter(types: Set(RecordType.allCases).subtracting([.vitamin]))
+
+        filter.toggleType(.vitamin)
+
+        #expect(filter.types.isEmpty)
+    }
+}
+
+@MainActor
+struct RecordPresentationTests {
+    private let moment = date(2026, 3, 10, 9, 0)
+
+    @Test func detailDependsOnTheRecordType() {
+        let sleep = BabyRecord(type: .sleep, occurredAt: moment, endedAt: date(2026, 3, 10, 10, 30), durationMinutes: 90)
+        let feed = BabyRecord(type: .feed, occurredAt: moment, feedSubtypes: [.breastfeeding], amountMl: 80)
+        let fever = BabyRecord(type: .fever, occurredAt: moment, temperatureC: 38.5)
+        let medicine = BabyRecord(type: .medicine, occurredAt: moment, note: "Paracetamol")
+
+        #expect(RecordDetail(sleep) == .sleep(minutes: 90, endedAt: date(2026, 3, 10, 10, 30)))
+        #expect(RecordDetail(feed) == .feed(subtypes: [.breastfeeding], amountMl: 80))
+        #expect(RecordDetail(fever) == .fever(38.5))
+        #expect(RecordDetail(medicine) == .note("Paracetamol"))
+    }
+
+    @Test func recordsWithoutExtraInformationHaveNoDetail() {
+        #expect(RecordDetail(BabyRecord(type: .poop, occurredAt: moment)) == nil)
+        #expect(RecordDetail(BabyRecord(type: .feed, occurredAt: moment)) == nil)
+        #expect(RecordDetail(BabyRecord(type: .vitamin, occurredAt: moment, note: "")) == nil)
+        #expect(RecordDetail(BabyRecord(type: .sleep, occurredAt: moment)) == nil)
+    }
+
+    @Test func feedBreakdownCountsSubtypesInFixedOrder() {
+        let records = [
+            BabyRecord(type: .feed, occurredAt: moment, feedSubtypes: [.extraFormula]),
+            BabyRecord(type: .feed, occurredAt: moment, feedSubtypes: [.breastfeeding, .extraFormula]),
+            BabyRecord(type: .feed, occurredAt: moment, feedSubtypes: [.breastfeeding]),
+            BabyRecord(type: .feed, occurredAt: moment),
+        ]
+
+        let breakdown = FeedBreakdown(records: records)
+
+        #expect(breakdown.entries == [
+            FeedBreakdown.Entry(subtype: .breastfeeding, count: 2),
+            FeedBreakdown.Entry(subtype: .extraFormula, count: 2),
+        ])
+        #expect(breakdown.untyped == 1)
+    }
+
+    @Test func daySummaryDependsOnTheActiveFilter() {
+        let records = [
+            BabyRecord(type: .feed, occurredAt: moment, feedSubtypes: [.breastfeeding]),
+            BabyRecord(type: .poop, occurredAt: moment),
+        ]
+
+        #expect(DaySummary(records: records, filter: RecordFilter(period: .all)) == .none)
+        #expect(DaySummary(records: records, filter: RecordFilter(types: [.feed, .poop], period: .all)) == .count(2))
+        #expect(DaySummary(records: records, filter: RecordFilter(types: [.feed], period: .all)) == .feedBreakdown(FeedBreakdown(records: records)))
+    }
+}
+
+@MainActor
+struct RecordEditInputTests {
+    private let moment = date(2026, 3, 10, 9, 0)
+
+    @Test func formStartsEqualToTheRecordAndIsNotDirty() {
+        let record = BabyRecord(type: .feed, occurredAt: moment, feedSubtypes: [.breastfeeding], amountMl: 90)
+
+        let input = RecordEditInput(record)
+
+        #expect(input.feed.subtypes == [.breastfeeding])
+        #expect(input.feed.amountText == "90")
+        #expect(input == RecordEditInput(record))
+    }
+
+    @Test func changingAFieldMakesTheFormDirty() {
+        let record = BabyRecord(type: .fever, occurredAt: moment, temperatureC: 38.5)
+        var input = RecordEditInput(record)
+
+        input.health.temperatureText = "39"
+
+        #expect(input != RecordEditInput(record))
+    }
+
+    @Test func feedNeedsASubtypeAndFeverNeedsATemperature() {
+        var feed = RecordEditInput(BabyRecord(type: .feed, occurredAt: moment, feedSubtypes: [.breastfeeding]))
+        feed.feed.toggle(.breastfeeding)
+        #expect(!feed.detailsAreValid)
+
+        var fever = RecordEditInput(BabyRecord(type: .fever, occurredAt: moment, temperatureC: 38))
+        fever.health.temperatureText = ""
+        #expect(!fever.detailsAreValid)
+
+        #expect(RecordEditInput(BabyRecord(type: .poop, occurredAt: moment)).detailsAreValid)
+    }
+
+    @Test func applyWritesTheFeedFields() {
+        let record = BabyRecord(type: .feed, occurredAt: moment, feedSubtypes: [.breastfeeding], amountMl: 90)
+        var input = RecordEditInput(record)
+        input.occurredAt = date(2026, 3, 10, 10, 15)
+        input.feed.toggle(.extraFormula)
+        input.feed.amountText = "120"
+
+        input.apply(to: record)
+
+        #expect(record.occurredAt == date(2026, 3, 10, 10, 15))
+        #expect(record.feedSubtypes == [.breastfeeding, .extraFormula])
+        #expect(record.amountMl == 120)
+    }
+
+    @Test func applyWritesTheFeverTemperatureOrTheNote() {
+        let fever = BabyRecord(type: .fever, occurredAt: moment, temperatureC: 38)
+        var feverInput = RecordEditInput(fever)
+        feverInput.health.temperatureText = "38,6"
+        feverInput.apply(to: fever)
+        #expect(fever.temperatureC == 38.6)
+
+        let medicine = BabyRecord(type: .medicine, occurredAt: moment, note: "A")
+        var medicineInput = RecordEditInput(medicine)
+        medicineInput.health.noteText = "  B 5ml "
+        medicineInput.apply(to: medicine)
+        #expect(medicine.note == "B 5ml")
+    }
+
+    @Test func editingASleepOnlyMovesItsStartTime() {
+        let sleep = BabyRecord(type: .sleep, occurredAt: moment, endedAt: date(2026, 3, 10, 10, 30), durationMinutes: 90)
+        var input = RecordEditInput(sleep)
+        input.occurredAt = date(2026, 3, 10, 8, 30)
+
+        input.apply(to: sleep)
+
+        #expect(sleep.occurredAt == date(2026, 3, 10, 8, 30))
+        #expect(sleep.durationMinutes == 90)
+        #expect(sleep.endedAt == date(2026, 3, 10, 10, 30))
+    }
+}
+
+@MainActor
+struct RecordsEmptyStateTests {
+    @Test func noRecordsAtAllIsDifferentFromNoMatches() {
+        #expect(RecordsEmptyState(totalCount: 0, filteredCount: 0) == .noRecords)
+        #expect(RecordsEmptyState(totalCount: 5, filteredCount: 0) == .noMatches)
+    }
+
+    @Test func nothingIsEmptyWhenThereIsSomethingToShow() {
+        #expect(RecordsEmptyState(totalCount: 5, filteredCount: 2) == nil)
+    }
+}

@@ -22,7 +22,7 @@ struct HomeView: View {
                 .foregroundStyle(Color.appInk)
             }
         }
-        .background(Color.appSurface)
+        .background(Color.appSurface.ignoresSafeArea())
         .sheet(isPresented: $isAddingBaby) { AddBabySheet() }
         .task {
             if babies.isEmpty { isAddingBaby = true }

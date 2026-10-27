@@ -15,4 +15,16 @@ struct RecordFilter: Equatable {
     func apply<Record: LoggedRecord>(to records: [Record], now: Date = .now, calendar: Calendar = .current) -> [Record] {
         records.filter { matches($0, now: now, calendar: calendar) }
     }
+    
+    /// Adds or removes a type. Selecting the last remaining type would select everything, which
+    /// filters nothing, so that case clears the selection instead.
+    mutating func toggleType(_ type: RecordType) {
+        if types.contains(type) {
+            types.remove(type)
+        } else if types.count + 1 == RecordType.allCases.count {
+            types.removeAll()
+        } else {
+            types.insert(type)
+        }
+    }
 }

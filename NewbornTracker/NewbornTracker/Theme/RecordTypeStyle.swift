@@ -84,3 +84,16 @@ extension Gender {
         }
     }
 }
+
+extension Period {
+    /// Title of a one-tap period. A custom range is titled by its dates in the view.
+    var title: LocalizedStringResource {
+        switch self {
+        case .all: "All"
+        case .today: "Today"
+        case .week: "Week"
+        case .month: "Month"
+        case .custom: "Custom"
+        }
+    }
+}

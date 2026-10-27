@@ -1,6 +1,6 @@
 import Foundation
 
-enum Period: Equatable {
+enum Period: Hashable {
     case all
     case today
     case week
