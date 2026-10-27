@@ -8,6 +8,7 @@ struct NewbornTrackerApp: App {
     private let notificationDelegate: NotificationDelegate
     @State private var activeBabyStore = ActiveBabyStore()
     @State private var router: AppRouter
+    @AppStorage("appearance") private var appearance = AppearanceMode.system
 
     init() {
         let container: ModelContainer
@@ -29,9 +30,10 @@ struct NewbornTrackerApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
                 .environment(activeBabyStore)
                 .environment(router)
+                .preferredColorScheme(appearance.colorScheme)
         }
         .modelContainer(container)
     }

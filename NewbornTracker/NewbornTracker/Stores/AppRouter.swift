@@ -8,4 +8,5 @@ final class AppRouter {
     }
 
     var pendingRoute: Route?
+    var isShowingSettings = false
 }

@@ -69,9 +69,13 @@ private struct GrowthContent: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             VStack(alignment: .leading, spacing: 12) {
-                Text("Growth")
-                    .font(.system(size: 24, weight: .heavy))
-                    .foregroundStyle(Color.appInk)
+                HStack {
+                    Text("Growth")
+                        .font(.system(size: 24, weight: .heavy))
+                        .foregroundStyle(Color.appInk)
+                    Spacer()
+                    SettingsButton()
+                }
 
                 Picker("Section", selection: $section) {
                     ForEach(GrowthSection.allCases, id: \.self) { section in

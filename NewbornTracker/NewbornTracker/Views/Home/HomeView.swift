@@ -135,18 +135,23 @@ private struct HomeContent: View {
     }
     
     private var header: some View {
-        HStack(spacing: 6) {
-            Image(systemName: "heart.fill")
-                .font(.system(size: 13))
-            Text("Today, \(Date.now.formatted(.dateTime.day().month(.wide)))")
-                .font(.system(size: 14, weight: .semibold))
-        }
-        .foregroundStyle(Color.appHighlight)
-        .frame(height: 36)
-        .overlay(alignment: .bottom) {
-            Line()
-                .stroke(Color.appHighlight, style: StrokeStyle(lineWidth: 1, dash: [3, 3]))
-                .frame(height: 1)
+        HStack {
+            HStack(spacing: 6) {
+                Image(systemName: "heart.fill")
+                    .font(.system(size: 13))
+                Text("Today, \(Date.now.formatted(.dateTime.day().month(.wide)))")
+                    .font(.system(size: 14, weight: .semibold))
+            }
+            .foregroundStyle(Color.appHighlight)
+            .frame(height: 36)
+            .overlay(alignment: .bottom) {
+                Line()
+                    .stroke(Color.appHighlight, style: StrokeStyle(lineWidth: 1, dash: [3, 3]))
+                    .frame(height: 1)
+            }
+            
+            Spacer()
+            SettingsButton()
         }
     }
     

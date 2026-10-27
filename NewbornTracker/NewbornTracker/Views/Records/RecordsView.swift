@@ -100,9 +100,13 @@ private struct RecordsContent: View {
     
     private var filterBar: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Records")
-                .font(.system(size: 24, weight: .heavy))
-                .foregroundStyle(Color.appInk)
+            HStack {
+                Text("Records")
+                    .font(.system(size: 24, weight: .heavy))
+                    .foregroundStyle(Color.appInk)
+                Spacer()
+                SettingsButton()
+            }
             
             HStack(spacing: 8) {
                 FilterTrigger(symbol: "line.3.horizontal.decrease", title: typeFilterTitle, isActive: !filter.types.isEmpty) {

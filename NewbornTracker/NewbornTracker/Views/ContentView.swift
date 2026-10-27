@@ -9,6 +9,8 @@ struct ContentView: View {
     @Environment(AppRouter.self) private var router
 
     var body: some View {
+        @Bindable var router = router
+
         TabView(selection: $selectedTab) {
             Tab("Home", systemImage: "house", value: AppTab.home) {
                 HomeView()
@@ -21,6 +23,9 @@ struct ContentView: View {
             }
         }
         .tint(Color.appPrimary)
+        .sheet(isPresented: $router.isShowingSettings) {
+            SettingsView()
+        }
         .onChange(of: router.pendingRoute) { _, route in
             if route != nil {
                 selectedTab = .home
