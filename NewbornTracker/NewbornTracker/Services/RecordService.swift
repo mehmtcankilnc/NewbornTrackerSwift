@@ -19,4 +19,20 @@ actor RecordService {
 
         return RecordValue(record)
     }
+    
+    /// Ends the baby's active sleep, for example from a notification button while the app is closed.
+    /// Nil when that baby has no sleep running.
+    func finishSleep(babyID: UUID, endedAt: Date = .now) throws -> RecordValue? {
+        let babies = try modelContext.fetch(FetchDescriptor<Baby>(predicate: #Predicate { $0.id == babyID }))
+        guard let baby = babies.first else { throw RecordServiceError.babyNotFound }
+        guard let sleep = baby.activeSleep else { return nil }
+
+        let record = BabyRecord(SleepTimer.finishedDraft(for: sleep, endedAt: endedAt))
+        modelContext.insert(record)
+        record.baby = baby
+        baby.activeSleep = nil
+        try modelContext.save()
+
+        return RecordValue(record)
+    }
 }

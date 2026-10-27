@@ -1,11 +1,12 @@
 import SwiftData
 import SwiftUI
+import UserNotifications
 
 struct HomeView: View {
     @Query(sort: \Baby.createdAt) private var babies: [Baby]
     @Environment(ActiveBabyStore.self) private var activeBabyStore
     @State private var isAddingBaby = false
-
+    
     var body: some View {
         Group {
             if let baby = activeBabyStore.activeBaby(in: babies) {
@@ -32,25 +33,30 @@ struct HomeView: View {
 
 private struct HomeContent: View {
     let baby: Baby
-
+    
     @Environment(\.modelContext) private var context
+    @Environment(AppRouter.self) private var router
+    @AppStorage("notificationsEnabled") private var notificationsEnabled = true
     @Query private var records: [BabyRecord]
     @State private var viewModel = HomeViewModel()
-
+    @State private var sleepToAnnounce: Date?
+    
+    private let notifications = SleepNotificationService(center: UNUserNotificationCenter.current())
+    
     init(baby: Baby) {
         self.baby = baby
         let babyID = baby.id
         _records = Query(filter: #Predicate<BabyRecord> { $0.baby?.id == babyID })
     }
-
+    
     var body: some View {
         let summary = HomeSummary(records: records)
-
+        
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
                 header
                     .padding(.top, 16)
-
+                
                 Text("Hi, \(baby.name)! 👶")
                     .font(.system(size: 24, weight: .heavy))
                     .foregroundStyle(Color.appInk)
@@ -60,7 +66,7 @@ private struct HomeContent: View {
                     .font(.system(size: 14))
                     .foregroundStyle(Color.appMuted)
                     .padding(.top, 4)
-
+                
                 LazyVGrid(columns: [GridItem(.flexible(), spacing: 14), GridItem(.flexible())], spacing: 12) {
                     ForEach([RecordType.poop, .piss, .feed], id: \.self) { type in
                         StatCard(
@@ -77,14 +83,14 @@ private struct HomeContent: View {
                     sleepCard(summary)
                 }
                 .padding(.top, 24)
-
+                
                 Text("Status")
                     .font(.system(size: 12, weight: .semibold))
                     .textCase(.uppercase)
                     .foregroundStyle(Color.appMuted)
                     .padding(.top, 24)
                     .padding(.bottom, 8)
-
+                
                 SecondaryStatRow(
                     title: "Health",
                     symbol: "cross.case",
@@ -109,8 +115,25 @@ private struct HomeContent: View {
         .sheet(item: $viewModel.sheet) { sheet in
             sheetContent(for: sheet)
         }
+        .alert("Track sleep duration", isPresented: Binding(get: { sleepToAnnounce != nil }, set: { if !$0 { sleepToAnnounce = nil } })) {
+            Button("Not now", role: .cancel) {}
+            Button("Continue") {
+                if let startedAt = sleepToAnnounce {
+                    Task { await requestPermissionAndAnnounce(startedAt) }
+                }
+            }
+        } message: {
+            Text("We'll show a notification while your baby sleeps, so you can quickly stop the timer when they wake up.")
+        }
+        .onChange(of: router.pendingRoute, initial: true) { _, route in
+            guard route == .stopSleep else { return }
+            router.pendingRoute = nil
+            if baby.activeSleep != nil {
+                viewModel.cardTapped(.sleep, isSleeping: true)
+            }
+        }
     }
-
+    
     private var header: some View {
         HStack(spacing: 6) {
             Image(systemName: "heart.fill")
@@ -126,7 +149,7 @@ private struct HomeContent: View {
                 .frame(height: 1)
         }
     }
-
+    
     private func sleepCard(_ summary: HomeSummary) -> some View {
         TimelineView(.periodic(from: .now, by: 30)) { timeline in
             let sleep = baby.activeSleep
@@ -143,7 +166,7 @@ private struct HomeContent: View {
             }
         }
     }
-
+    
     private func sleepValue(sleep: ActiveSleep?, summary: HomeSummary, now: Date) -> String {
         if let sleep {
             return DurationText.string(minutes: SleepTimer.elapsedMinutes(of: sleep, now: now), style: .compact)
@@ -153,12 +176,12 @@ private struct HomeContent: View {
         }
         return "—"
     }
-
+    
     private func lastSubtitle(_ time: Date?) -> String {
         guard let time else { return String(localized: "Not yet") }
         return String(localized: "Last: \(time.formatted(date: .omitted, time: .shortened))")
     }
-
+    
     @ViewBuilder
     private var toastView: some View {
         if let toast = viewModel.toast {
@@ -172,7 +195,7 @@ private struct HomeContent: View {
                 .transition(.move(edge: .bottom).combined(with: .opacity))
         }
     }
-
+    
     @ViewBuilder
     private func sheetContent(for sheet: HomeViewModel.Sheet) -> some View {
         switch sheet {
@@ -208,18 +231,48 @@ private struct HomeContent: View {
             }
         }
     }
-
+    
     private func perform(_ action: HomeViewModel.Action?) {
         guard let action else { return }
-
+        
         switch action {
         case .save(let draft):
             context.insertRecord(draft, for: baby)
         case .startSleep(let startedAt):
             baby.activeSleep = ActiveSleep(startedAt: startedAt, notificationID: nil)
+            Task { await announceSleep(startedAt) }
         case .finishSleep(let endedAt):
+            let notificationID = baby.activeSleep?.notificationID
             context.finishSleep(of: baby, endedAt: endedAt)
+            notifications.dismiss(notificationID)
         }
+    }
+    
+    /// Shows the sleep notification, asking for permission first the very first time.
+    private func announceSleep(_ startedAt: Date) async {
+        guard notificationsEnabled else { return }
+        
+        switch await notifications.permission() {
+        case .allowed:
+            await postSleepNotification(startedAt)
+        case .notDetermined:
+            // Wait for the time picker sheet to finish closing before showing the explanation.
+            try? await Task.sleep(for: .milliseconds(500))
+            sleepToAnnounce = startedAt
+        case .denied:
+            break
+        }
+    }
+    
+    private func requestPermissionAndAnnounce(_ startedAt: Date) async {
+        if await notifications.requestPermission() {
+            await postSleepNotification(startedAt)
+        }
+    }
+    
+    private func postSleepNotification(_ startedAt: Date) async {
+        guard let id = await notifications.notifySleepStarted(babyID: baby.id, startedAt: startedAt) else { return }
+        baby.activeSleep?.notificationID = id
     }
 }
 

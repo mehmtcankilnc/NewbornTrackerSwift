@@ -1,6 +1,7 @@
 import Foundation
 import Testing
 import SwiftData
+import UserNotifications
 @testable import NewbornTracker
 
 private let calendar: Calendar = {
@@ -1232,5 +1233,173 @@ struct RecordsEmptyStateTests {
 
     @Test func nothingIsEmptyWhenThereIsSomethingToShow() {
         #expect(RecordsEmptyState(totalCount: 5, filteredCount: 2) == nil)
+    }
+}
+
+@MainActor
+struct SleepNotificationTests {
+    private let babyID = UUID()
+
+    @Test func contentCarriesTheBabyAndAMarker() {
+        let content = SleepNotification.content(babyID: babyID, startedAt: date(2026, 3, 10, 1, 0))
+
+        #expect(content.userInfo["type"] == "sleep")
+        #expect(content.userInfo["babyID"] == babyID.uuidString)
+        #expect(!content.title.isEmpty)
+        #expect(content.body.contains(date(2026, 3, 10, 1, 0).formatted(date: .omitted, time: .shortened)))
+    }
+
+    @Test func tappingTheNotificationOpensTheStopSleepScreen() {
+        let userInfo: [AnyHashable: Any] = ["type": "sleep", "babyID": babyID.uuidString]
+
+        #expect(SleepNotification.response(actionID: UNNotificationDefaultActionIdentifier, userInfo: userInfo) == .openStopSleep)
+    }
+
+    @Test func theStopButtonCarriesTheBabyId() {
+        let userInfo: [AnyHashable: Any] = ["type": "sleep", "babyID": babyID.uuidString]
+
+        #expect(SleepNotification.response(actionID: SleepNotification.stopActionID, userInfo: userInfo) == .stopSleep(babyID: babyID))
+    }
+
+    @Test func otherNotificationsAndBrokenDataAreIgnored() {
+        #expect(SleepNotification.response(actionID: UNNotificationDefaultActionIdentifier, userInfo: [:]) == nil)
+        #expect(SleepNotification.response(actionID: UNNotificationDefaultActionIdentifier, userInfo: ["type": "other"]) == nil)
+        #expect(SleepNotification.response(actionID: SleepNotification.stopActionID, userInfo: ["type": "sleep"]) == nil)
+        #expect(SleepNotification.response(actionID: SleepNotification.stopActionID, userInfo: ["type": "sleep", "babyID": "nope"]) == nil)
+        #expect(SleepNotification.response(actionID: "unknown", userInfo: ["type": "sleep"]) == nil)
+    }
+}
+
+private final class FakeNotificationCenter: NotificationCentering {
+    var status: UNAuthorizationStatus = .notDetermined
+    var grantsPermission = true
+    var requestCount = 0
+    var added: [UNNotificationRequest] = []
+    var removed: [[String]] = []
+
+    func authorizationStatus() async -> UNAuthorizationStatus { status }
+
+    func requestAuthorization() async throws -> Bool {
+        requestCount += 1
+        return grantsPermission
+    }
+
+    func add(_ request: UNNotificationRequest) async throws {
+        added.append(request)
+    }
+
+    func removeDeliveredNotifications(withIdentifiers identifiers: [String]) {
+        removed.append(identifiers)
+    }
+}
+
+@MainActor
+struct SleepNotificationServiceTests {
+    private let babyID = UUID()
+
+    @Test(arguments: [
+        (UNAuthorizationStatus.notDetermined, NotificationPermission.notDetermined),
+        (.authorized, .allowed),
+        (.provisional, .allowed),
+        (.denied, .denied),
+    ])
+    func permissionMapsTheSystemStatus(status: UNAuthorizationStatus, expected: NotificationPermission) async {
+        let center = FakeNotificationCenter()
+        center.status = status
+
+        #expect(await SleepNotificationService(center: center).permission() == expected)
+    }
+
+    @Test func allowedNotificationsAreShownWithTheStopButtonCategory() async {
+        let center = FakeNotificationCenter()
+        center.status = .authorized
+
+        let id = await SleepNotificationService(center: center).notifySleepStarted(babyID: babyID, startedAt: date(2026, 3, 10, 1, 0))
+
+        #expect(id != nil)
+        #expect(center.added.count == 1)
+        #expect(center.added.first?.identifier == id)
+        #expect(center.added.first?.content.categoryIdentifier == SleepNotification.categoryID)
+        #expect(center.added.first?.content.userInfo["babyID"] as? String == babyID.uuidString)
+        #expect(center.added.first?.trigger == nil)
+    }
+
+    @Test(arguments: [UNAuthorizationStatus.notDetermined, .denied])
+    func nothingIsShownWithoutPermission(status: UNAuthorizationStatus) async {
+        let center = FakeNotificationCenter()
+        center.status = status
+
+        let id = await SleepNotificationService(center: center).notifySleepStarted(babyID: babyID, startedAt: .now)
+
+        #expect(id == nil)
+        #expect(center.added.isEmpty)
+    }
+
+    @Test func requestingPermissionReturnsTheAnswer() async {
+        let center = FakeNotificationCenter()
+        center.grantsPermission = false
+
+        #expect(await SleepNotificationService(center: center).requestPermission() == false)
+        #expect(center.requestCount == 1)
+    }
+
+    @Test func dismissingRemovesTheDeliveredNotification() {
+        let center = FakeNotificationCenter()
+        let service = SleepNotificationService(center: center)
+
+        service.dismiss("abc")
+        service.dismiss(nil)
+
+        #expect(center.removed == [["abc"]])
+    }
+}
+
+@MainActor
+struct FinishSleepInTheBackgroundTests {
+    @Test func finishingSavesTheRecordAndClearsTheSleep() async throws {
+        let container = try makeContainer()
+        let baby = Baby(name: "Ada")
+        baby.activeSleep = ActiveSleep(startedAt: date(2026, 3, 10, 1, 0), notificationID: nil)
+        container.mainContext.insert(baby)
+        try container.mainContext.save()
+
+        let value = try await RecordService(modelContainer: container)
+            .finishSleep(babyID: baby.id, endedAt: date(2026, 3, 10, 2, 30))
+
+        #expect(value?.durationMinutes == 90)
+        let stored = try ModelContext(container).fetch(FetchDescriptor<Baby>())
+        #expect(stored.first?.activeSleep == nil)
+        #expect(stored.first?.records.count == 1)
+    }
+
+    @Test func nothingHappensWithoutARunningSleep() async throws {
+        let container = try makeContainer()
+        let baby = Baby(name: "Ada")
+        container.mainContext.insert(baby)
+        try container.mainContext.save()
+
+        let value = try await RecordService(modelContainer: container).finishSleep(babyID: baby.id)
+
+        #expect(value == nil)
+        #expect(try ModelContext(container).fetchCount(FetchDescriptor<BabyRecord>()) == 0)
+    }
+
+    @Test func unknownBabyThrows() async throws {
+        let container = try makeContainer()
+
+        await #expect(throws: RecordServiceError.babyNotFound) {
+            try await RecordService(modelContainer: container).finishSleep(babyID: UUID())
+        }
+    }
+}
+
+@MainActor
+struct SleepNotificationCategoryTests {
+    @Test func categoryHasABackgroundStopButton() {
+        let category = SleepNotification.makeCategory()
+
+        #expect(category.identifier == SleepNotification.categoryID)
+        #expect(category.actions.map(\.identifier) == [SleepNotification.stopActionID])
+        #expect(category.actions.first?.options.contains(.foreground) == false)
     }
 }

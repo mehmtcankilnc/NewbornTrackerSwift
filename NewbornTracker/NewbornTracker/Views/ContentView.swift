@@ -6,6 +6,7 @@ enum AppTab: Hashable {
 
 struct ContentView: View {
     @State private var selectedTab = AppTab.home
+    @Environment(AppRouter.self) private var router
 
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -20,5 +21,10 @@ struct ContentView: View {
             }
         }
         .tint(Color.appPrimary)
+        .onChange(of: router.pendingRoute) { _, route in
+            if route != nil {
+                selectedTab = .home
+            }
+        }
     }
 }

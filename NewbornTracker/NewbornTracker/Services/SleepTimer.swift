@@ -1,6 +1,6 @@
 import Foundation
 
-enum SleepTimer {
+nonisolated enum SleepTimer {
     static func elapsedMinutes(of sleep: ActiveSleep, now: Date = .now) -> Int {
         max(0, minutes(from: sleep.startedAt, to: now))
     }
