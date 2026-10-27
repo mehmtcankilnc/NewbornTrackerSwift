@@ -16,16 +16,16 @@ struct RecordTypeFilterSheet: View {
                     } label: {
                         HStack(spacing: 12) {
                             Image(systemName: type.symbolName)
-                                .font(.system(size: 15))
+                                .scaledFont(size: 15)
                                 .foregroundStyle(isSelected ? Color.white : type.accent)
                                 .frame(width: 32, height: 32)
                                 .background(isSelected ? Color.white.opacity(0.25) : type.accentBackground, in: .circle)
                             Text(String(localized: type.title))
-                                .font(.system(size: 16, weight: isSelected ? .semibold : .regular))
+                                .scaledFont(size: 16, weight: isSelected ? .semibold : .regular)
                             Spacer()
                             if isSelected {
                                 Image(systemName: "checkmark")
-                                    .font(.system(size: 14, weight: .semibold))
+                                    .scaledFont(size: 14, weight: .semibold)
                             }
                         }
                         .foregroundStyle(isSelected ? Color.white : Color.appInk)
@@ -102,7 +102,7 @@ struct CustomRangeSheet: View {
     private func dateRow(_ title: LocalizedStringKey, selection: Binding<Date>) -> some View {
         HStack {
             Text(title)
-                .font(.system(size: 14))
+                .scaledFont(size: 14)
                 .foregroundStyle(Color.appMuted)
             Spacer()
             DatePicker("", selection: selection, displayedComponents: .date)

@@ -16,13 +16,13 @@ struct StatCard: View {
             VStack(alignment: .leading, spacing: 12) {
                 HStack {
                     Label(String(localized: title), systemImage: symbol)
-                        .font(.system(size: 13, weight: .semibold))
+                        .scaledFont(size: 13, weight: .semibold)
                         .foregroundStyle(accent)
                         .lineLimit(1)
                     Spacer(minLength: 4)
                     if let topRight {
                         Text(topRight)
-                            .font(.system(size: 11))
+                            .scaledFont(size: 11)
                             .foregroundStyle(Color.appMuted)
                     }
                 }
@@ -31,20 +31,20 @@ struct StatCard: View {
                     VStack(alignment: .leading, spacing: 4) {
                         HStack(alignment: .lastTextBaseline, spacing: 4) {
                             Text(value)
-                                .font(.system(size: 26, weight: .semibold))
+                                .scaledFont(size: 26, weight: .semibold)
                                 .foregroundStyle(Color.appInk)
                                 .lineLimit(1)
                             if let unit {
                                 Text(String(localized: unit))
-                                    .font(.system(size: 14))
+                                    .scaledFont(size: 14)
                                     .foregroundStyle(Color.appMuted)
                             }
                         }
                         if let subtitle {
                             Text(subtitle)
-                                .font(.system(size: 12))
+                                .scaledFont(size: 12)
                                 .foregroundStyle(Color.appMuted)
-                                .lineLimit(1)
+                                .lineLimit(2)
                         }
                     }
                     Spacer(minLength: 0)

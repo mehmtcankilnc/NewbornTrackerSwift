@@ -14,10 +14,10 @@ struct ProfileSection: View {
         VStack(alignment: .leading, spacing: 24) {
             SettingsSection(title: "Baby's name") {
                 TextField("Name", text: $input.name)
-                    .font(.system(size: 16, weight: .semibold))
+                    .scaledFont(size: 16, weight: .semibold)
                     .foregroundStyle(Color.appInk)
                     .padding(.horizontal, 16)
-                    .frame(height: 48)
+                    .frame(minHeight: 48)
                     .background(Color.appSurfaceElevated, in: .capsule)
                     .onChange(of: input.name) { _, newValue in
                         input.name = String(newValue.prefix(30))
@@ -27,7 +27,7 @@ struct ProfileSection: View {
             SettingsSection(title: "Birth date") {
                 VStack(alignment: .leading, spacing: 8) {
                     Toggle("Add birth date", isOn: $input.hasBirthDate)
-                        .font(.system(size: 16))
+                        .scaledFont(size: 16)
                         .foregroundStyle(Color.appInk)
                         .tint(Color.appPrimary)
                     if input.hasBirthDate {

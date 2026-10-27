@@ -58,12 +58,12 @@ private struct HomeContent: View {
                     .padding(.top, 16)
                 
                 Text("Hi, \(baby.name)! 👶")
-                    .font(.system(size: 24, weight: .heavy))
+                    .scaledFont(size: 24, weight: .heavy)
                     .foregroundStyle(Color.appInk)
                     .lineLimit(1)
                     .padding(.top, 16)
                 Text("Start by adding a record")
-                    .font(.system(size: 14))
+                    .scaledFont(size: 14)
                     .foregroundStyle(Color.appMuted)
                     .padding(.top, 4)
                 
@@ -85,7 +85,7 @@ private struct HomeContent: View {
                 .padding(.top, 24)
                 
                 Text("Status")
-                    .font(.system(size: 12, weight: .semibold))
+                    .scaledFont(size: 12, weight: .semibold)
                     .textCase(.uppercase)
                     .foregroundStyle(Color.appMuted)
                     .padding(.top, 24)
@@ -138,12 +138,12 @@ private struct HomeContent: View {
         HStack {
             HStack(spacing: 6) {
                 Image(systemName: "heart.fill")
-                    .font(.system(size: 13))
+                    .scaledFont(size: 13)
                 Text("Today, \(Date.now.formatted(.dateTime.day().month(.wide)))")
-                    .font(.system(size: 14, weight: .semibold))
+                    .scaledFont(size: 14, weight: .semibold)
             }
             .foregroundStyle(Color.appHighlight)
-            .frame(height: 36)
+            .frame(minHeight: 36)
             .overlay(alignment: .bottom) {
                 Line()
                     .stroke(Color.appHighlight, style: StrokeStyle(lineWidth: 1, dash: [3, 3]))
@@ -191,7 +191,7 @@ private struct HomeContent: View {
     private var toastView: some View {
         if let toast = viewModel.toast {
             Text("\(String(localized: toast.type.title)) saved · \(toast.time.formatted(date: .omitted, time: .shortened))")
-                .font(.system(size: 14, weight: .medium))
+                .scaledFont(size: 14, weight: .medium)
                 .foregroundStyle(.white)
                 .padding(.horizontal, 16)
                 .padding(.vertical, 10)

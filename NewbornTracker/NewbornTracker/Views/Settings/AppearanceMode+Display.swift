@@ -8,12 +8,4 @@ extension AppearanceMode {
         case .dark: "Dark"
         }
     }
-
-    var symbolName: String {
-        switch self {
-        case .system: "circle.lefthalf.filled"
-        case .light: "sun.max"
-        case .dark: "moon"
-        }
-    }
 }

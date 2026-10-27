@@ -14,7 +14,7 @@ struct AddBabySheet: View {
 
             VStack(alignment: .leading, spacing: 8) {
                 Text("Gender (optional)")
-                    .font(.system(size: 12, weight: .semibold))
+                    .scaledFont(size: 12, weight: .semibold)
                     .foregroundStyle(Color.appMuted)
                 ForEach(Gender.allCases) { gender in
                     OptionPill(title: String(localized: gender.title), isSelected: input.gender == gender) {
@@ -25,7 +25,7 @@ struct AddBabySheet: View {
 
             VStack(alignment: .leading, spacing: 8) {
                 Toggle("Add birth date", isOn: $input.hasBirthDate)
-                    .font(.system(size: 16))
+                    .scaledFont(size: 16)
                     .foregroundStyle(Color.appInk)
                     .tint(Color.appPrimary)
                 if input.hasBirthDate {

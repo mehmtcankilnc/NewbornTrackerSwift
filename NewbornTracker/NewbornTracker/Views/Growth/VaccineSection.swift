@@ -45,16 +45,16 @@ struct VaccineSection: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .firstTextBaseline) {
                 Text("Vaccine schedule")
-                    .font(.system(size: 16, weight: .bold))
+                    .scaledFont(size: 16, weight: .bold)
                     .foregroundStyle(Color.appInk)
                 Spacer()
                 Text("\(progress.done)/\(progress.total)")
-                    .font(.system(size: 12, weight: .semibold))
+                    .scaledFont(size: 12, weight: .semibold)
                     .foregroundStyle(Color.appMuted)
             }
 
             Text("A general guide. Check with your pediatrician for the exact schedule.")
-                .font(.system(size: 12))
+                .scaledFont(size: 12)
                 .foregroundStyle(Color.appMuted)
 
             AddEntryCard(

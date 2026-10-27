@@ -11,17 +11,17 @@ struct StopSleepSheet: View {
         SheetScaffold(title: "Sleep timer") {
             VStack(spacing: 8) {
                 Text("Sleeping since \(sleep.startedAt.formatted(date: .omitted, time: .shortened))")
-                    .font(.system(size: 14))
+                    .scaledFont(size: 14)
                     .foregroundStyle(Color.appMuted)
                 Text(timerInterval: sleep.startedAt...Date.distantFuture, countsDown: false, showsHours: true)
-                    .font(.system(size: 44, weight: .bold))
+                    .scaledFont(size: 44, weight: .bold)
                     .monospacedDigit()
                     .foregroundStyle(Color.appInk)
             }
             .frame(maxWidth: .infinity)
 
             Text("When did sleep end?")
-                .font(.system(size: 16, weight: .semibold))
+                .scaledFont(size: 16, weight: .semibold)
                 .foregroundStyle(Color.appInk)
 
             TimeSelectionList(selection: $selection)

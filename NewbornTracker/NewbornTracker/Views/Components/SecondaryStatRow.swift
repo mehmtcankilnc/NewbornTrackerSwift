@@ -14,18 +14,18 @@ struct SecondaryStatRow: View {
         Button(action: action) {
             HStack(spacing: 12) {
                 Image(systemName: symbol)
-                    .font(.system(size: 17))
+                    .scaledFont(size: 17)
                     .foregroundStyle(accent)
                     .frame(width: 40, height: 40)
                     .background(accent.opacity(0.1), in: .circle)
 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(String(localized: title))
-                        .font(.system(size: 14, weight: .semibold))
+                        .scaledFont(size: 14, weight: .semibold)
                         .foregroundStyle(Color.appInk)
                     if let subtitle {
                         Text(subtitle)
-                            .font(.system(size: 12))
+                            .scaledFont(size: 12)
                             .foregroundStyle(Color.appMuted)
                             .lineLimit(1)
                     }
@@ -35,11 +35,11 @@ struct SecondaryStatRow: View {
 
                 HStack(spacing: 6) {
                     Text(value)
-                        .font(.system(size: 16, weight: .bold))
+                        .scaledFont(size: 16, weight: .bold)
                         .foregroundStyle(Color.appInk)
                     if showsChevron {
                         Image(systemName: "chevron.right")
-                            .font(.system(size: 13))
+                            .scaledFont(size: 13)
                             .foregroundStyle(Color.appMuted)
                     }
                 }

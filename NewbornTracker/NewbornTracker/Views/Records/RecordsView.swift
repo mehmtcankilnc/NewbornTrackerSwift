@@ -102,7 +102,7 @@ private struct RecordsContent: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Text("Records")
-                    .font(.system(size: 24, weight: .heavy))
+                    .scaledFont(size: 24, weight: .heavy)
                     .foregroundStyle(Color.appInk)
                 Spacer()
                 SettingsButton()
@@ -117,8 +117,12 @@ private struct RecordsContent: View {
                 }
                 Spacer(minLength: 0)
                 Picker("View", selection: $display) {
-                    Image(systemName: "list.bullet").tag(RecordsDisplay.list)
-                    Image(systemName: "chart.bar.fill").tag(RecordsDisplay.chart)
+                    Image(systemName: "list.bullet")
+                        .accessibilityLabel("List")
+                        .tag(RecordsDisplay.list)
+                    Image(systemName: "chart.bar.fill")
+                        .accessibilityLabel("Chart")
+                        .tag(RecordsDisplay.chart)
                 }
                 .pickerStyle(.segmented)
                 .frame(width: 96)
@@ -202,7 +206,7 @@ private struct RecordsContent: View {
                 Text(summary)
             }
         }
-        .font(.system(size: 12, weight: .semibold))
+        .scaledFont(size: 12, weight: .semibold)
         .foregroundStyle(Color.appMuted)
         .padding(.horizontal, 4)
         .padding(.top, 8)
@@ -235,13 +239,13 @@ private struct RecordsContent: View {
     private func emptyView(_ state: RecordsEmptyState) -> some View {
         VStack(spacing: 6) {
             Text(state == .noRecords ? "No records yet" : "No records match these filters")
-                .font(.system(size: 16, weight: .semibold))
+                .scaledFont(size: 16, weight: .semibold)
                 .foregroundStyle(Color.appInk)
                 .multilineTextAlignment(.center)
             Text(state == .noRecords
                  ? "It'll show up here once you log a poop, pee, feed, or sleep from Home."
                  : "Try a different filter or clear them.")
-            .font(.system(size: 14))
+            .scaledFont(size: 14)
             .foregroundStyle(Color.appMuted)
             .multilineTextAlignment(.center)
             if state == .noRecords {

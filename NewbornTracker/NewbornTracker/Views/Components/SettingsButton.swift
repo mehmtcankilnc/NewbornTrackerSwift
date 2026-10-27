@@ -9,7 +9,7 @@ struct SettingsButton: View {
             router.isShowingSettings = true
         } label: {
             Image(systemName: "gearshape")
-                .font(.system(size: 16))
+                .scaledFont(size: 16)
                 .foregroundStyle(Color.appInk)
                 .frame(width: 36, height: 36)
                 .background(Color.appSurfaceElevated, in: .circle)

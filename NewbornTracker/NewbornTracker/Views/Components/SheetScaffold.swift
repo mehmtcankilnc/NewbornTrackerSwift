@@ -14,7 +14,7 @@ struct SheetScaffold<Content: View>: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 Text(String(localized: title))
-                    .font(.system(size: 18, weight: .semibold))
+                    .scaledFont(size: 18, weight: .semibold)
                     .foregroundStyle(Color.appInk)
                 content
             }

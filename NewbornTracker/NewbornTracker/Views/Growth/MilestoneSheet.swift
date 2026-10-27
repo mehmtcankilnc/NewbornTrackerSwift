@@ -27,7 +27,7 @@ struct MilestoneSheet: View {
         SheetScaffold(title: LocalizedStringResource(stringLiteral: row.name), fixedHeight: 540) {
             HStack {
                 Text("Date")
-                    .font(.system(size: 14))
+                    .scaledFont(size: 14)
                     .foregroundStyle(Color.appMuted)
                 Spacer()
                 DatePicker("", selection: $input.achievedAt, in: ...Date.now, displayedComponents: .date)
@@ -40,11 +40,11 @@ struct MilestoneSheet: View {
 
             VStack(alignment: .leading, spacing: 6) {
                 Text("Note (optional)")
-                    .font(.system(size: 12, weight: .semibold))
+                    .scaledFont(size: 12, weight: .semibold)
                     .foregroundStyle(Color.appMuted)
                 TextField("A few words about this moment...", text: $input.noteText, axis: .vertical)
                     .lineLimit(3...5)
-                    .font(.system(size: 16))
+                    .scaledFont(size: 16)
                     .foregroundStyle(Color.appInk)
                     .padding(.horizontal, 16)
                     .padding(.vertical, 12)
@@ -93,7 +93,7 @@ struct MilestoneSheet: View {
                         photos.delete(input.setPhoto(nil))
                     } label: {
                         Image(systemName: "xmark")
-                            .font(.system(size: 13, weight: .bold))
+                            .scaledFont(size: 13, weight: .bold)
                             .foregroundStyle(.white)
                             .frame(width: 32, height: 32)
                             .background(.black.opacity(0.5), in: .circle)
@@ -104,7 +104,7 @@ struct MilestoneSheet: View {
         } else {
             PhotosPicker(selection: $pickerItem, matching: .images) {
                 Label("Add photo", systemImage: "photo")
-                    .font(.system(size: 14, weight: .semibold))
+                    .scaledFont(size: 14, weight: .semibold)
                     .foregroundStyle(Color.appMuted)
                     .frame(maxWidth: .infinity, minHeight: 140)
                     .overlay(
@@ -116,7 +116,7 @@ struct MilestoneSheet: View {
 
         if photoFailed {
             Text("This photo could not be loaded.")
-                .font(.system(size: 12))
+                .scaledFont(size: 12)
                 .foregroundStyle(Color.appDanger)
         }
     }

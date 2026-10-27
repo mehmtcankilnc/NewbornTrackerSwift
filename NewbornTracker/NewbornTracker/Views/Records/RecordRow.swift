@@ -6,18 +6,18 @@ struct RecordRow: View {
     var body: some View {
         HStack(spacing: 12) {
             Image(systemName: record.type.symbolName)
-                .font(.system(size: 19))
+                .scaledFont(size: 19)
                 .foregroundStyle(record.type.accent)
                 .frame(width: 44, height: 44)
                 .background(record.type.accentBackground, in: .circle)
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(String(localized: record.type.title))
-                    .font(.system(size: 16, weight: .semibold))
+                    .scaledFont(size: 16, weight: .semibold)
                     .foregroundStyle(Color.appInk)
                 if let detail = detailText {
                     Text(detail)
-                        .font(.system(size: 12))
+                        .scaledFont(size: 12)
                         .foregroundStyle(Color.appMuted)
                         .lineLimit(1)
                 }
@@ -26,7 +26,7 @@ struct RecordRow: View {
             Spacer(minLength: 8)
 
             Text(record.occurredAt.formatted(date: .omitted, time: .shortened))
-                .font(.system(size: 12, weight: .semibold))
+                .scaledFont(size: 12, weight: .semibold)
                 .monospacedDigit()
                 .foregroundStyle(Color.appMuted)
         }

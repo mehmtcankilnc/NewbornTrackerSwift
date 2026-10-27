@@ -14,7 +14,7 @@ struct PillButton: View {
     var body: some View {
         Button(action: action) {
             Text(title)
-                .font(.system(size: 16, weight: .semibold))
+                .scaledFont(size: 16, weight: .semibold)
                 .foregroundStyle(style == .secondary ? Color.appInk : .white)
                 .frame(maxWidth: .infinity, minHeight: 48)
                 .background(fill, in: .capsule)
@@ -47,11 +47,11 @@ struct OptionPill: View {
         Button(action: action) {
             HStack {
                 Text(title)
-                    .font(.system(size: 16, weight: isSelected ? .semibold : .regular))
+                    .scaledFont(size: 16, weight: isSelected ? .semibold : .regular)
                 Spacer()
                 if isSelected {
                     Image(systemName: "checkmark")
-                        .font(.system(size: 14, weight: .semibold))
+                        .scaledFont(size: 14, weight: .semibold)
                 }
             }
             .foregroundStyle(isSelected ? Color.white : Color.appInk)
@@ -73,14 +73,14 @@ struct PillTextField: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             Text(title)
-                .font(.system(size: 12, weight: .semibold))
+                .scaledFont(size: 12, weight: .semibold)
                 .foregroundStyle(Color.appMuted)
             TextField(placeholder, text: $text)
                 .keyboardType(keyboard)
-                .font(.system(size: 16))
+                .scaledFont(size: 16)
                 .foregroundStyle(Color.appInk)
                 .padding(.horizontal, 16)
-                .frame(height: 48)
+                .frame(minHeight: 48)
                 .background(Color.appSurfaceElevated, in: .capsule)
         }
     }

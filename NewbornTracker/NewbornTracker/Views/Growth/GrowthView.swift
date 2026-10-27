@@ -71,7 +71,7 @@ private struct GrowthContent: View {
             VStack(alignment: .leading, spacing: 12) {
                 HStack {
                     Text("Growth")
-                        .font(.system(size: 24, weight: .heavy))
+                        .scaledFont(size: 24, weight: .heavy)
                         .foregroundStyle(Color.appInk)
                     Spacer()
                     SettingsButton()
@@ -147,7 +147,7 @@ private struct GrowthContent: View {
                 }
                 .accessibilityLabel("About percentile curves")
             }
-            .font(.system(size: 11))
+            .scaledFont(size: 11)
             .foregroundStyle(Color.appMuted)
             .frame(maxWidth: .infinity)
 
@@ -170,7 +170,7 @@ private struct GrowthContent: View {
     private func history(points: [GrowthPoint]) -> some View {
         if points.isEmpty {
             Text("No measurements yet.")
-                .font(.system(size: 14))
+                .scaledFont(size: 14)
                 .foregroundStyle(Color.appMuted)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 8)
@@ -194,15 +194,15 @@ private struct GrowthContent: View {
         HStack {
             VStack(alignment: .leading, spacing: 2) {
                 Text(point.date.formatted(.dateTime.day().month(.wide).year()))
-                    .font(.system(size: 14, weight: .semibold))
+                    .scaledFont(size: 14, weight: .semibold)
                     .foregroundStyle(Color.appInk)
                 Text("Month \(Int(point.months.rounded()))")
-                    .font(.system(size: 12))
+                    .scaledFont(size: 12)
                     .foregroundStyle(Color.appMuted)
             }
             Spacer()
             Text(metric.formatted(point.value))
-                .font(.system(size: 14, weight: .bold))
+                .scaledFont(size: 14, weight: .bold)
                 .foregroundStyle(Color.appInk)
         }
         .padding(.horizontal, 16)
@@ -214,14 +214,14 @@ private struct GrowthContent: View {
     private var birthInfoCard: some View {
         VStack(spacing: 6) {
             Image(systemName: "calendar")
-                .font(.system(size: 22))
+                .scaledFont(size: 22)
                 .foregroundStyle(Color.appMuted)
                 .padding(.bottom, 6)
             Text("Birth date and gender needed")
-                .font(.system(size: 14, weight: .semibold))
+                .scaledFont(size: 14, weight: .semibold)
                 .foregroundStyle(Color.appInk)
             Text("Add a birth date and gender to compare against percentile curves.")
-                .font(.system(size: 12))
+                .scaledFont(size: 12)
                 .foregroundStyle(Color.appMuted)
                 .multilineTextAlignment(.center)
         }

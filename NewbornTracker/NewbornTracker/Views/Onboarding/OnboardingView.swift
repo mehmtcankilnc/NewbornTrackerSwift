@@ -65,11 +65,11 @@ struct OnboardingView: View {
         VStack(spacing: 12) {
             badge(symbol: page.symbol)
             Text(page.title)
-                .font(.system(size: 24, weight: .heavy))
+                .scaledFont(size: 24, weight: .heavy)
                 .foregroundStyle(Color.appInk)
                 .multilineTextAlignment(.center)
             Text(page.message)
-                .font(.system(size: 16))
+                .scaledFont(size: 16)
                 .foregroundStyle(Color.appMuted)
                 .multilineTextAlignment(.center)
         }
@@ -79,11 +79,11 @@ struct OnboardingView: View {
         VStack(spacing: 12) {
             badge(symbol: "person.fill")
             Text("What's your baby's name?")
-                .font(.system(size: 24, weight: .heavy))
+                .scaledFont(size: 24, weight: .heavy)
                 .foregroundStyle(Color.appInk)
                 .multilineTextAlignment(.center)
             Text("You can add the birth date and gender later in Settings.")
-                .font(.system(size: 16))
+                .scaledFont(size: 16)
                 .foregroundStyle(Color.appMuted)
                 .multilineTextAlignment(.center)
                 .padding(.bottom, 12)
@@ -92,9 +92,9 @@ struct OnboardingView: View {
                 .submitLabel(.done)
                 .onSubmit(finish)
                 .multilineTextAlignment(.center)
-                .font(.system(size: 16, weight: .semibold))
+                .scaledFont(size: 16, weight: .semibold)
                 .foregroundStyle(Color.appInk)
-                .frame(height: 52)
+                .frame(minHeight: 52)
                 .background(Color.appSurfaceElevated, in: .capsule)
                 .onChange(of: flow.baby.name) { _, newValue in
                     flow.baby.name = String(newValue.prefix(30))
@@ -104,7 +104,7 @@ struct OnboardingView: View {
 
     private func badge(symbol: String) -> some View {
         Image(systemName: symbol)
-            .font(.system(size: 34))
+            .scaledFont(size: 34)
             .foregroundStyle(Color.appHighlight)
             .frame(width: 80, height: 80)
             .background(Color.appHighlight.opacity(0.1), in: .circle)
@@ -127,7 +127,7 @@ struct OnboardingView: View {
         if flow.isIntro {
             HStack {
                 Button("Skip") { flow.skip() }
-                    .font(.system(size: 16, weight: .semibold))
+                    .scaledFont(size: 16, weight: .semibold)
                     .foregroundStyle(Color.appMuted)
                     .padding(.vertical, 12)
                 Spacer()

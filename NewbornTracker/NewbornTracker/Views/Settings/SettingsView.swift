@@ -121,10 +121,10 @@ struct SettingsView: View {
             Toggle(isOn: $notificationsEnabled) {
                 VStack(alignment: .leading, spacing: 2) {
                     Text("App notifications")
-                        .font(.system(size: 16))
+                        .scaledFont(size: 16)
                         .foregroundStyle(Color.appInk)
                     Text("Show a notification while tracking sleep")
-                        .font(.system(size: 12))
+                        .scaledFont(size: 12)
                         .foregroundStyle(Color.appMuted)
                 }
             }
@@ -141,7 +141,7 @@ struct SettingsView: View {
                 isConfirmingDeleteRecords = true
             } label: {
                 Label("Delete all records", systemImage: "trash")
-                    .font(.system(size: 16, weight: .semibold))
+                    .scaledFont(size: 16, weight: .semibold)
                     .foregroundStyle(Color.appDanger)
                     .padding(.horizontal, 16)
                     .frame(maxWidth: .infinity, minHeight: 48, alignment: .leading)

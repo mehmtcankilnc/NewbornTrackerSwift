@@ -45,7 +45,7 @@ struct RecordsChart: View {
 
             if types.contains(.sleep) {
                 Text("Sleep bars show session count, not duration.")
-                    .font(.system(size: 11))
+                    .scaledFont(size: 11)
                     .foregroundStyle(Color.appMuted)
                     .frame(maxWidth: .infinity)
             }

@@ -14,12 +14,12 @@ struct ChecklistRow<Leading: View>: View {
                 leading
                 VStack(alignment: .leading, spacing: 2) {
                     Text(title)
-                        .font(.system(size: 14, weight: .semibold))
+                        .scaledFont(size: 14, weight: .semibold)
                         .foregroundStyle(isDone ? Color.appMuted : Color.appInk)
                         .strikethrough(isDone)
                     if !subtitle.isEmpty {
                         Text(subtitle)
-                            .font(.system(size: 12))
+                            .scaledFont(size: 12)
                             .foregroundStyle(Color.appMuted)
                             .lineLimit(1)
                     }
@@ -47,7 +47,7 @@ struct CheckCircle: View {
             .overlay {
                 if isDone {
                     Image(systemName: "checkmark")
-                        .font(.system(size: 12, weight: .bold))
+                        .scaledFont(size: 12, weight: .bold)
                         .foregroundStyle(.white)
                 }
             }

@@ -12,12 +12,12 @@ struct HealthTypePickerSheet: View {
                     } label: {
                         HStack(spacing: 12) {
                             Image(systemName: type.symbolName)
-                                .font(.system(size: 16))
+                                .scaledFont(size: 16)
                                 .foregroundStyle(type.accent)
                                 .frame(width: 36, height: 36)
                                 .background(type.accentBackground, in: .circle)
                             Text(String(localized: type.title))
-                                .font(.system(size: 16, weight: .semibold))
+                                .scaledFont(size: 16, weight: .semibold)
                                 .foregroundStyle(Color.appInk)
                             Spacer()
                         }

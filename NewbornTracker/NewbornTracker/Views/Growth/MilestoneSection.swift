@@ -24,7 +24,7 @@ struct MilestoneSection: View {
 
         VStack(alignment: .leading, spacing: 12) {
             Text("Every child develops at their own pace. These ages are a rough guide.")
-                .font(.system(size: 12))
+                .scaledFont(size: 12)
                 .foregroundStyle(Color.appMuted)
 
             AddEntryCard(

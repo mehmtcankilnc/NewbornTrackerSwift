@@ -21,7 +21,7 @@ struct GrowthEntrySheet: View {
         SheetScaffold(title: measurement == nil ? "Add measurement" : "Edit measurement") {
             HStack {
                 Text("Date")
-                    .font(.system(size: 14))
+                    .scaledFont(size: 14)
                     .foregroundStyle(Color.appMuted)
                 Spacer()
                 DatePicker("", selection: $input.date, in: ...Date.now, displayedComponents: .date)

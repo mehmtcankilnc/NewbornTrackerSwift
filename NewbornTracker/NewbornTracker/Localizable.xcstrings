@@ -1,85 +1,99 @@
 {
-  "sourceLanguage": "en",
-  "strings": {
-    "": {},
-    "\"%@\" and all their records will be deleted. This can't be undone.": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "\"%@\" ve tüm kayıtları silinecek. Bu işlem geri alınamaz."
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+
+    },
+    "—" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "—"
           }
         }
       }
     },
-    "\"%@\" will be deleted. This can't be undone.": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "\"%@\" silinecek. Bu işlem geri alınamaz."
+    "\"%@\" and all their records will be deleted. This can't be undone." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\"%@\" ve tüm kayıtları silinecek. Bu işlem geri alınamaz."
           }
         }
       }
     },
-    "%@ is sleeping": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ uyuyor"
+    "\"%@\" will be deleted. This can't be undone." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\"%@\" silinecek. Bu işlem geri alınamaz."
           }
         }
       }
     },
-    "%@ saved · %@": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ kaydedildi · %@"
+    "%@ is sleeping" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ uyuyor"
           }
         }
       }
     },
-    "%lld": {},
-    "%lld min ago": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld dk önce"
+    "%@ saved · %@" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ kaydedildi · %@"
           }
         }
       }
     },
-    "%lld records": {
-      "localizations": {
-        "en": {
-          "variations": {
-            "plural": {
-              "one": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "%lld record"
+    "%lld" : {
+
+    },
+    "%lld min ago" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld dk önce"
+          }
+        }
+      }
+    },
+    "%lld records" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld record"
                 }
               },
-              "other": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "%lld records"
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld records"
                 }
               }
             }
           }
         },
-        "tr": {
-          "variations": {
-            "plural": {
-              "other": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "%lld kayıt"
+        "tr" : {
+          "variations" : {
+            "plural" : {
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld kayıt"
                 }
               }
             }
@@ -87,2367 +101,2381 @@
         }
       }
     },
-    "%lld types selected": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld tür seçili"
+    "%lld types selected" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld tür seçili"
           }
         }
       }
     },
-    "%lld/%lld": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld/%lld"
+    "%lld/%lld" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld/%lld"
           }
         }
       }
     },
-    "1st grade": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1. sınıf"
+    "1st grade" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1. sınıf"
           }
         }
       }
     },
-    "8th grade": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "8. sınıf"
+    "8th grade" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "8. sınıf"
           }
         }
       }
     },
-    "A few words about this moment...": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bu anı hakkında birkaç kelime..."
+    "A few words about this moment..." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bu anı hakkında birkaç kelime..."
           }
         }
       }
     },
-    "A general guide. Check with your pediatrician for the exact schedule.": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Genel bir rehberdir; kesin takvim için çocuk doktorunuza danışın."
+    "A general guide. Check with your pediatrician for the exact schedule." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Genel bir rehberdir; kesin takvim için çocuk doktorunuza danışın."
           }
         }
       }
     },
-    "About percentile curves": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Persentil eğrileri hakkında"
+    "About percentile curves" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Persentil eğrileri hakkında"
           }
         }
       }
     },
-    "Achieved on %@": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Başarıldı: %@"
+    "Achieved on %@" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Başarıldı: %@"
           }
         }
       }
     },
-    "Add a birth date and gender to compare against percentile curves.": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Persentil eğrileriyle karşılaştırmak için doğum tarihi ve cinsiyet ekle."
+    "Add a birth date and gender to compare against percentile curves." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Persentil eğrileriyle karşılaştırmak için doğum tarihi ve cinsiyet ekle."
           }
         }
       }
     },
-    "Add a new baby": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Yeni bebek ekle"
+    "Add a new baby" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yeni bebek ekle"
           }
         }
       }
     },
-    "Add a vaccine that isn't on the built-in schedule.": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Takvimde olmayan bir aşıyı kendin ekle."
+    "Add a vaccine that isn't on the built-in schedule." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Takvimde olmayan bir aşıyı kendin ekle."
           }
         }
       }
     },
-    "Add birth date": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Doğum tarihi ekle"
+    "Add birth date" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Doğum tarihi ekle"
           }
         }
       }
     },
-    "Add measurement": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ölçüm ekle"
+    "Add measurement" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ölçüm ekle"
           }
         }
       }
     },
-    "Add photo": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fotoğraf ekle"
+    "Add photo" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fotoğraf ekle"
           }
         }
       }
     },
-    "Add record": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kayıt ekle"
+    "Add record" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kayıt ekle"
           }
         }
       }
     },
-    "Add vaccine": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aşı ekle"
+    "Add vaccine" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aşı ekle"
           }
         }
       }
     },
-    "Add your baby": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bebeğini ekle"
+    "Add your baby" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bebeğini ekle"
           }
         }
       }
     },
-    "Add your baby on the Home tab.": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ana Sayfa sekmesinden bebeğini ekle."
+    "Add your baby on the Home tab." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ana Sayfa sekmesinden bebeğini ekle."
           }
         }
       }
     },
-    "Add your baby to start logging.": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kayıt tutmaya başlamak için bebeğini ekle."
+    "Add your baby to start logging." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kayıt tutmaya başlamak için bebeğini ekle."
           }
         }
       }
     },
-    "Add your own moment": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kendi anını ekle"
+    "Add your own moment" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kendi anını ekle"
           }
         }
       }
     },
-    "Age (months)": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Yaş (ay)"
+    "Age (months)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yaş (ay)"
           }
         }
       }
     },
-    "Age range (optional)": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Yaş aralığı (opsiyonel)"
+    "Age range (optional)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yaş aralığı (opsiyonel)"
           }
         }
       }
     },
-    "All": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tümü"
+    "All" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tümü"
           }
         }
       }
     },
-    "All poop, pee, feed, and sleep records will be deleted. The baby's name and settings are kept. This can't be undone.": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kaka, çiş, mama ve uyku kayıtlarının tamamı silinecek. Bebek adı ve ayarların kalır. Bu işlem geri alınamaz."
+    "All poop, pee, feed, and sleep records will be deleted. The baby's name and settings are kept. This can't be undone." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kaka, çiş, mama ve uyku kayıtlarının tamamı silinecek. Bebek adı ve ayarların kalır. Bu işlem geri alınamaz."
           }
         }
       }
     },
-    "Amount (ml, optional)": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Miktar (ml, opsiyonel)"
+    "Amount (ml, optional)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Miktar (ml, opsiyonel)"
           }
         }
       }
     },
-    "App notifications": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uygulama bildirimi"
+    "App notifications" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uygulama bildirimi"
           }
         }
       }
     },
-    "Appearance": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Görünüm"
+    "Appearance" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Görünüm"
           }
         }
       }
     },
-    "Apply": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uygula"
+    "Apply" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uygula"
           }
         }
       }
     },
-    "At birth": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Doğumda"
+    "At birth" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Doğumda"
           }
         }
       }
     },
-    "BCG (tuberculosis)": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "BCG (Verem)"
+    "Babies" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bebekler"
           }
         }
       }
     },
-    "Babies": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bebekler"
+    "Baby" : {
+
+    },
+    "Baby's name" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bebeğin adı"
+          }
+        }
+      }
+    },
+    "BCG (tuberculosis)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "BCG (Verem)"
           }
         }
       }
     },
-    "Baby": {},
-    "Baby's name": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bebeğin adı"
+    "Birth date" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Doğum tarihi"
           }
         }
       }
     },
-    "Birth date": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Doğum tarihi"
+    "Birth date and gender needed" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Doğum tarihi ve cinsiyet gerekli"
           }
         }
       }
     },
-    "Birth date and gender needed": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Doğum tarihi ve cinsiyet gerekli"
+    "Boy" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erkek"
           }
         }
       }
     },
-    "Boy": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Erkek"
+    "Breastfeeding" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Süt emme"
           }
         }
       }
     },
-    "Breastfeeding": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Süt emme"
+    "Can't delete" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Silinemez"
           }
         }
       }
     },
-    "Can't delete": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Silinemez"
+    "Cancel" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İptal"
           }
         }
       }
     },
-    "Cancel": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "İptal"
+    "Chart" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grafik"
           }
         }
       }
     },
-    "Clear": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Temizle"
+    "Clear" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temizle"
           }
         }
       }
     },
-    "Confirm": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Onayla"
+    "Confirm" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Onayla"
           }
         }
       }
     },
-    "Continue": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Devam et"
+    "Continue" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Devam et"
           }
         }
       }
     },
-    "Crawling": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Emekleme"
+    "Crawling" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Emekleme"
           }
         }
       }
     },
-    "Custom": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Özel"
+    "Custom" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Özel"
           }
         }
       }
     },
-    "Custom: %@": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Özel: %@"
+    "Custom: %@" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Özel: %@"
           }
         }
       }
     },
-    "Custom…": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Özel…"
+    "Custom…" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Özel…"
           }
         }
       }
     },
-    "DTaP-IPV (booster)": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "DaBT-İPA (rapel)"
+    "Dark" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Koyu"
           }
         }
       }
     },
-    "DTaP-IPV-Hib (booster)": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "DaBT-İPA-Hib (rapel)"
+    "Data" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Veri"
           }
         }
       }
     },
-    "DTaP-IPV-Hib (dose 1)": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "DaBT-İPA-Hib (1. doz)"
+    "Date" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tarih"
           }
         }
       }
     },
-    "DTaP-IPV-Hib (dose 2)": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "DaBT-İPA-Hib (2. doz)"
+    "Date range" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tarih aralığı"
           }
         }
       }
     },
-    "DTaP-IPV-Hib (dose 3)": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "DaBT-İPA-Hib (3. doz)"
+    "Day" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gün"
           }
         }
       }
     },
-    "Dark": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Koyu"
+    "Delete" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sil"
           }
         }
       }
     },
-    "Data": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Veri"
+    "Delete all" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tümünü sil"
           }
         }
       }
     },
-    "Date": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tarih"
+    "Delete all records" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tüm kayıtları sil"
           }
         }
       }
     },
-    "Date range": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tarih aralığı"
+    "Delete all records?" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tüm kayıtlar silinsin mi?"
           }
         }
       }
     },
-    "Day": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gün"
+    "Delete this baby?" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bu bebek silinsin mi?"
           }
         }
       }
     },
-    "Delete": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sil"
+    "Delete this moment?" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bu an silinsin mi?"
           }
         }
       }
     },
-    "Delete all": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tümünü sil"
+    "Delete this record?" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kayıt silinsin mi?"
           }
         }
       }
     },
-    "Delete all records": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tüm kayıtları sil"
+    "Delete this vaccine?" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bu aşı silinsin mi?"
           }
         }
       }
     },
-    "Delete all records?": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tüm kayıtlar silinsin mi?"
+    "Done" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bitti"
           }
         }
       }
     },
-    "Delete this baby?": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bu bebek silinsin mi?"
+    "DTaP-IPV (booster)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DaBT-İPA (rapel)"
           }
         }
       }
     },
-    "Delete this moment?": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bu an silinsin mi?"
+    "DTaP-IPV-Hib (booster)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DaBT-İPA-Hib (rapel)"
           }
         }
       }
     },
-    "Delete this record?": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kayıt silinsin mi?"
+    "DTaP-IPV-Hib (dose 1)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DaBT-İPA-Hib (1. doz)"
           }
         }
       }
     },
-    "Delete this vaccine?": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bu aşı silinsin mi?"
+    "DTaP-IPV-Hib (dose 2)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DaBT-İPA-Hib (2. doz)"
           }
         }
       }
     },
-    "Done": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bitti"
+    "DTaP-IPV-Hib (dose 3)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DaBT-İPA-Hib (3. doz)"
           }
         }
       }
     },
-    "Edit": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Düzenle"
+    "e.g. 38.2" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Örn. 38.2"
           }
         }
       }
     },
-    "Edit %@ record": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ kaydını düzenle"
+    "e.g. 120" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Örn. 120"
           }
         }
       }
     },
-    "Edit measurement": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ölçümü düzenle"
+    "e.g. Every autumn" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "örn. Her yıl sonbahar"
           }
         }
       }
     },
-    "Edit vaccine": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aşıyı düzenle"
+    "e.g. First laugh" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "örn. İlk kahkaha"
           }
         }
       }
     },
-    "End": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bitiş"
+    "e.g. Flu shot" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "örn. Grip aşısı"
           }
         }
       }
     },
-    "Every child develops at their own pace. These ages are a rough guide.": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Her çocuk kendi hızında gelişir; bu yaşlar yaklaşık bir rehberdir."
+    "e.g. Months 5-6" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "örn. 5-6. ay"
           }
         }
       }
     },
-    "Everything is stored on your phone. No account, no sign-up.": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Her şey telefonunda saklanır. Hesap veya üyelik gerekmez."
+    "e.g. Paracetamol 5ml" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Örn. Parasetamol 5ml"
           }
         }
       }
     },
-    "Extra breast milk": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ekstra anne sütü"
+    "e.g. Vitamin D" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Örn. D Vitamini"
           }
         }
       }
     },
-    "Extra formula": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ekstra mama"
+    "Edit" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Düzenle"
           }
         }
       }
     },
-    "Feed": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mama"
+    "Edit %@ record" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ kaydını düzenle"
           }
         }
       }
     },
-    "Feed type": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mama türü"
+    "Edit measurement" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ölçümü düzenle"
           }
         }
       }
     },
-    "Fever": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ateş"
+    "Edit vaccine" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aşıyı düzenle"
           }
         }
       }
     },
-    "First sentence": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "İlk cümle"
+    "End" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bitiş"
           }
         }
       }
     },
-    "First social smile": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "İlk sosyal gülümseme"
+    "Every child develops at their own pace. These ages are a rough guide." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Her çocuk kendi hızında gelişir; bu yaşlar yaklaşık bir rehberdir."
           }
         }
       }
     },
-    "First steps": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "İlk adımlar"
+    "Everything is stored on your phone. No account, no sign-up." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Her şey telefonunda saklanır. Hesap veya üyelik gerekmez."
           }
         }
       }
     },
-    "First tooth": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "İlk diş"
+    "Extra breast milk" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ekstra anne sütü"
           }
         }
       }
     },
-    "First word": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "İlk kelime"
+    "Extra formula" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ekstra mama"
           }
         }
       }
     },
-    "Gender": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cinsiyet"
+    "Feed" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mama"
           }
         }
       }
     },
-    "Gender (optional)": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cinsiyet (isteğe bağlı)"
+    "Feed type" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mama türü"
           }
         }
       }
     },
-    "Get started": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Başla"
+    "Fever" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ateş"
           }
         }
       }
     },
-    "Girl": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kız"
+    "First sentence" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İlk cümle"
           }
         }
       }
     },
-    "Go to Home": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ana Sayfa'ya git"
+    "First social smile" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İlk sosyal gülümseme"
           }
         }
       }
     },
-    "Growth": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Büyüme"
+    "First steps" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İlk adımlar"
           }
         }
       }
     },
-    "Head": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Baş"
+    "First tooth" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İlk diş"
           }
         }
       }
     },
-    "Head circumference": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Baş çevresi"
+    "First word" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İlk kelime"
           }
         }
       }
     },
-    "Head circumference (cm)": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Baş çevresi (cm)"
+    "Gender" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cinsiyet"
           }
         }
       }
     },
-    "Head control": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Baş tutma"
+    "Gender (optional)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cinsiyet (isteğe bağlı)"
           }
         }
       }
     },
-    "Health": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sağlık"
+    "Get started" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Başla"
           }
         }
       }
     },
-    "Height": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Boy"
+    "Girl" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kız"
           }
         }
       }
     },
-    "Height (cm)": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Boy (cm)"
+    "Go to Home" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ana Sayfa'ya git"
           }
         }
       }
     },
-    "Hepatitis A (dose 1)": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hepatit A (1. doz)"
+    "Growth" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Büyüme"
           }
         }
       }
     },
-    "Hepatitis A (dose 2)": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hepatit A (2. doz)"
+    "Head" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Baş"
           }
         }
       }
     },
-    "Hepatitis B (dose 1)": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hepatit B (1. doz)"
+    "Head circumference" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Baş çevresi"
           }
         }
       }
     },
-    "Hepatitis B (dose 2)": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hepatit B (2. doz)"
+    "Head circumference (cm)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Baş çevresi (cm)"
           }
         }
       }
     },
-    "Hepatitis B (dose 3)": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hepatit B (3. doz)"
+    "Head control" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Baş tutma"
           }
         }
       }
     },
-    "Hi, %@! 👶": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Selam, %@! 👶"
+    "Health" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sağlık"
           }
         }
       }
     },
-    "Home": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ana Sayfa"
+    "Height" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Boy"
           }
         }
       }
     },
-    "It'll show up here once you log a poop, pee, feed, or sleep from Home.": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ana Sayfa sekmesinden kaka, çiş, mama veya uyku kaydı oluşturduğunda burada görünecek."
+    "Height (cm)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Boy (cm)"
           }
         }
       }
     },
-    "Keep multiple babies' records separate.": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Birden fazla bebeğin kayıtlarını ayrı tut."
+    "Hepatitis A (dose 1)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hepatit A (1. doz)"
           }
         }
       }
     },
-    "Last: %@": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Son: %@"
+    "Hepatitis A (dose 2)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hepatit A (2. doz)"
           }
         }
       }
     },
-    "Light": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Açık"
+    "Hepatitis B (dose 1)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hepatit B (1. doz)"
           }
         }
       }
     },
-    "Line": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Çizgi"
+    "Hepatitis B (dose 2)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hepatit B (2. doz)"
           }
         }
       }
     },
-    "Log poop, pee, feeds, and sleep in one tap. Fever, medicine, and vitamins too.": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kaka, çiş, mama ve uyku kayıtlarını tek dokunuşla ekle; ateş, ilaç ve vitamin için de yerinde."
+    "Hepatitis B (dose 3)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hepatit B (3. doz)"
           }
         }
       }
     },
-    "MMR (dose 2)": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "KKK (2. doz)"
+    "Hi, %@! 👶" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selam, %@! 👶"
           }
         }
       }
     },
-    "MMR - Measles, Mumps, Rubella (dose 1)": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "KKK - Kızamık, Kızamıkçık, Kabakulak (1. doz)"
+    "Home" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ana Sayfa"
           }
         }
       }
     },
-    "Measurement": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ölçüm"
+    "It'll show up here once you log a poop, pee, feed, or sleep from Home." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ana Sayfa sekmesinden kaka, çiş, mama veya uyku kaydı oluşturduğunda burada görünecek."
           }
         }
       }
     },
-    "Medicine": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "İlaç"
+    "Keep multiple babies' records separate." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Birden fazla bebeğin kayıtlarını ayrı tut."
           }
         }
       }
     },
-    "Milestones": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gelişim Notları"
+    "Last: %@" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Son: %@"
           }
         }
       }
     },
-    "Month": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ay"
+    "Light" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Açık"
           }
         }
       }
     },
-    "Month %lld": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld. ay"
+    "Line" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Çizgi"
           }
         }
       }
     },
-    "Month 12": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "12. ay"
+    "List" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Liste"
           }
         }
       }
     },
-    "Month 18": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "18. ay"
+    "Log poop, pee, feeds, and sleep in one tap. Fever, medicine, and vitamins too." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kaka, çiş, mama ve uyku kayıtlarını tek dokunuşla ekle; ateş, ilaç ve vitamin için de yerinde."
           }
         }
       }
     },
-    "Month 2": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "2. ay"
+    "Measurement" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ölçüm"
           }
         }
       }
     },
-    "Month 24": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "24. ay"
+    "Medicine" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İlaç"
           }
         }
       }
     },
-    "Month 4": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "4. ay"
+    "Milestones" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gelişim Notları"
           }
         }
       }
     },
-    "Month 6": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "6. ay"
+    "MMR - Measles, Mumps, Rubella (dose 1)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "KKK - Kızamık, Kızamıkçık, Kabakulak (1. doz)"
           }
         }
       }
     },
-    "Months 1-2": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1-2. ay"
+    "MMR (dose 2)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "KKK (2. doz)"
           }
         }
       }
     },
-    "Months 12-18": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "12-18. ay"
+    "Month" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ay"
           }
         }
       }
     },
-    "Months 18-24": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "18-24. ay"
+    "Month %lld" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld. ay"
           }
         }
       }
     },
-    "Months 3-4": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "3-4. ay"
+    "Month 2" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2. ay"
           }
         }
       }
     },
-    "Months 4-6": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "4-6. ay"
+    "Month 4" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "4. ay"
           }
         }
       }
     },
-    "Months 6-10": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "6-10. ay"
+    "Month 6" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "6. ay"
           }
         }
       }
     },
-    "Months 6-8": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "6-8. ay"
+    "Month 12" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "12. ay"
           }
         }
       }
     },
-    "Months 7-10": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "7-10. ay"
+    "Month 18" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "18. ay"
           }
         }
       }
     },
-    "Months 8-10": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "8-10. ay"
+    "Month 24" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "24. ay"
           }
         }
       }
     },
-    "Months 9-14": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "9-14. ay"
+    "Months 1-2" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1-2. ay"
           }
         }
       }
     },
-    "Months 9-15": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "9-15. ay"
+    "Months 3-4" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3-4. ay"
           }
         }
       }
     },
-    "Name": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "İsim"
+    "Months 4-6" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "4-6. ay"
           }
         }
       }
     },
-    "Name / dose": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ad / doz"
+    "Months 6-8" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "6-8. ay"
           }
         }
       }
     },
-    "New moment": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Yeni an"
+    "Months 6-10" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "6-10. ay"
           }
         }
       }
     },
-    "Next": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "İleri"
+    "Months 7-10" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-10. ay"
           }
         }
       }
     },
-    "No baby yet": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Henüz bebek yok"
+    "Months 8-10" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "8-10. ay"
           }
         }
       }
     },
-    "No measurements yet.": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Henüz ölçüm eklenmedi."
+    "Months 9-14" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "9-14. ay"
           }
         }
       }
     },
-    "No records match these filters": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bu filtrelere uygun kayıt yok"
+    "Months 9-15" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "9-15. ay"
           }
         }
       }
     },
-    "No records yet": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Henüz kayıt yok"
+    "Months 12-18" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "12-18. ay"
           }
         }
       }
     },
-    "Not now": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Şimdi değil"
+    "Months 18-24" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "18-24. ay"
           }
         }
       }
     },
-    "Not yet": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Henüz yok"
+    "Name" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İsim"
           }
         }
       }
     },
-    "Note (optional)": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Not (opsiyonel)"
+    "Name / dose" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ad / doz"
           }
         }
       }
     },
-    "Note down moments that are just yours, like a first laugh.": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "İlk kahkaha gibi sadece sana ait anları not et."
+    "New moment" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yeni an"
           }
         }
       }
     },
-    "Notifications": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bildirimler"
+    "Next" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İleri"
           }
         }
       }
     },
-    "Now": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Şimdi"
+    "No baby yet" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Henüz bebek yok"
           }
         }
       }
     },
-    "OK": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tamam"
+    "No measurements yet." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Henüz ölçüm eklenmedi."
           }
         }
       }
     },
-    "OPV (dose 2)": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "OPA (2. doz)"
+    "No records match these filters" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bu filtrelere uygun kayıt yok"
           }
         }
       }
     },
-    "OPV - Oral Polio (dose 1)": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "OPA - Oral Polio (1. doz)"
+    "No records yet" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Henüz kayıt yok"
           }
         }
       }
     },
-    "Ongoing": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Devam ediyor"
+    "Not now" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Şimdi değil"
           }
         }
       }
     },
-    "Pee": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Çiş"
+    "Not yet" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Henüz yok"
           }
         }
       }
     },
-    "Pneumococcal conjugate (booster)": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Konjuge Pnömokok (rapel)"
+    "Note (optional)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not (opsiyonel)"
           }
         }
       }
     },
-    "Pneumococcal conjugate (dose 1)": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Konjuge Pnömokok (1. doz)"
+    "Note down moments that are just yours, like a first laugh." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İlk kahkaha gibi sadece sana ait anları not et."
           }
         }
       }
     },
-    "Pneumococcal conjugate (dose 2)": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Konjuge Pnömokok (2. doz)"
+    "Notifications" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bildirimler"
           }
         }
       }
     },
-    "Poop": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kaka"
+    "Now" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Şimdi"
           }
         }
       }
     },
-    "Private on your device": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cihazında güvende"
+    "OK" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tamam"
           }
         }
       }
     },
-    "Pulling up to stand": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tutunarak ayağa kalkma"
+    "Ongoing" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Devam ediyor"
           }
         }
       }
     },
-    "Record type": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kayıt türü"
+    "OPV - Oral Polio (dose 1)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OPA - Oral Polio (1. doz)"
           }
         }
       }
     },
-    "Records": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kayıtlar"
+    "OPV (dose 2)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OPA (2. doz)"
           }
         }
       }
     },
-    "Remove photo": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fotoğrafı kaldır"
+    "other" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "diğer"
           }
         }
       }
     },
-    "Rolling over": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Yuvarlanma"
+    "Pee" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Çiş"
           }
         }
       }
     },
-    "Running": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Koşma"
+    "Pneumococcal conjugate (booster)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konjuge Pnömokok (rapel)"
           }
         }
       }
     },
-    "Save": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kaydet"
+    "Pneumococcal conjugate (dose 1)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konjuge Pnömokok (1. doz)"
           }
         }
       }
     },
-    "Section": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bölüm"
+    "Pneumococcal conjugate (dose 2)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konjuge Pnömokok (2. doz)"
           }
         }
       }
     },
-    "See development in one place": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gelişimi bir arada gör"
+    "Poop" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kaka"
           }
         }
       }
     },
-    "Settings": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ayarlar"
+    "Private on your device" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cihazında güvende"
           }
         }
       }
     },
-    "Show a notification while tracking sleep": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uyku takibi sırasında bildirim gösterilsin"
+    "Pulling up to stand" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tutunarak ayağa kalkma"
           }
         }
       }
     },
-    "Sitting without support": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Desteksiz oturma"
+    "Record type" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kayıt türü"
           }
         }
       }
     },
-    "Skip": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Geç"
+    "Records" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kayıtlar"
           }
         }
       }
     },
-    "Sleep": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uyku"
+    "Remove photo" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fotoğrafı kaldır"
           }
         }
       }
     },
-    "Sleep bars show session count, not duration.": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uyku çubukları uyku sayısını gösterir, süreyi değil."
+    "Rolling over" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yuvarlanma"
           }
         }
       }
     },
-    "Sleep in progress": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uyku devam ediyor"
+    "Running" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Koşma"
           }
         }
       }
     },
-    "Sleep timer": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uyku zamanlayıcısı"
+    "Save" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kaydet"
           }
         }
       }
     },
-    "Sleeping since %@": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uyku başladı: %@"
+    "Section" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bölüm"
           }
         }
       }
     },
-    "Sleeping since %@ · Tap to stop": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uyku başladı: %@ · Durdurmak için dokun"
+    "See development in one place" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gelişimi bir arada gör"
           }
         }
       }
     },
-    "Start": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Başlangıç"
+    "Settings" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ayarlar"
           }
         }
       }
     },
-    "Start by adding a record": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hemen bir kayıt ekleyerek başla"
+    "Show a notification while tracking sleep" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uyku takibi sırasında bildirim gösterilsin"
           }
         }
       }
     },
-    "Status": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Durum"
+    "Sitting without support" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desteksiz oturma"
           }
         }
       }
     },
-    "Stop sleep": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uykuyu durdur"
+    "Skip" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geç"
           }
         }
       }
     },
-    "System": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sistem"
+    "Sleep" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uyku"
           }
         }
       }
     },
-    "Td (Tetanus-Diphtheria) booster": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Td (Tetanoz-Difteri) rapeli"
+    "Sleep bars show session count, not duration." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uyku çubukları uyku sayısını gösterir, süreyi değil."
           }
         }
       }
     },
-    "Temperature (°C)": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sıcaklık (°C)"
+    "Sleep in progress" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uyku devam ediyor"
           }
         }
       }
     },
-    "The last remaining baby profile can't be deleted.": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Son kalan bebek profili silinemez."
+    "Sleep timer" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uyku zamanlayıcısı"
           }
         }
       }
     },
-    "The vaccine schedule, growth chart, and milestone notes all live in the Growth tab.": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aşı takvimi, büyüme grafiği ve gelişim notları Büyüme sekmesinde."
+    "Sleeping since %@" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uyku başladı: %@"
           }
         }
       }
     },
-    "These curves come from the World Health Organization's growth data, collected from millions of children of the same age and sex. The P50 line is the median, and the others (P3–P97) mark the lower and upper bounds of the typical range. If your baby's own line tracks steadily within these bands, growth is following its own curve. What matters is the trend over time, not a single measurement. Talk to your pediatrician if you have concerns.": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Eğriler, Dünya Sağlık Örgütü'nün aynı yaş ve cinsiyetteki milyonlarca çocuktan topladığı büyüme verilerine dayanır. P50 çizgisi ortalamayı, diğerleri (P3–P97) normal aralığın alt ve üst sınırlarını gösterir. Bebeğinizin kendi çizgisi bu bantların içinde ilerliyorsa büyümesi kendi eğrisinde devam ediyor demektir. Tek bir ölçüm değil, zaman içindeki eğilim önemlidir. Endişeleriniz varsa çocuk doktorunuza danışın."
+    "Sleeping since %@ · Tap to stop" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uyku başladı: %@ · Durdurmak için dokun"
           }
         }
       }
     },
-    "This %@ record will be deleted.": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bu %@ kaydı silinecek."
+    "Start" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Başlangıç"
           }
         }
       }
     },
-    "This photo could not be loaded.": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bu fotoğraf yüklenemedi."
+    "Start by adding a record" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hemen bir kayıt ekleyerek başla"
           }
         }
       }
     },
-    "Time": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Saat"
+    "Status" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Durum"
           }
         }
       }
     },
-    "Timing (optional)": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zamanlama (opsiyonel)"
+    "Stop sleep" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uykuyu durdur"
           }
         }
       }
     },
-    "Today": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bugün"
+    "System" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sistem"
           }
         }
       }
     },
-    "Today at a glance": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bugün bir bakışta"
+    "Td (Tetanus-Diphtheria) booster" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Td (Tetanoz-Difteri) rapeli"
           }
         }
       }
     },
-    "Today's counts. Tap poop, pee or feed to log one.": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bugünün sayıları. Kaka, çiş veya mama eklemek için dokun."
+    "Temperature (°C)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sıcaklık (°C)"
           }
         }
       }
     },
-    "Today, %@": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bugün, %@"
+    "The last remaining baby profile can't be deleted." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Son kalan bebek profili silinemez."
           }
         }
       }
     },
-    "Track sleep duration": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uyku süresini takip et"
+    "The vaccine schedule, growth chart, and milestone notes all live in the Growth tab." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aşı takvimi, büyüme grafiği ve gelişim notları Büyüme sekmesinde."
           }
         }
       }
     },
-    "Tracking made easy": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Günlük takip kolaylaşsın"
+    "These curves come from the World Health Organization's growth data, collected from millions of children of the same age and sex. The P50 line is the median, and the others (P3–P97) mark the lower and upper bounds of the typical range. If your baby's own line tracks steadily within these bands, growth is following its own curve. What matters is the trend over time, not a single measurement. Talk to your pediatrician if you have concerns." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eğriler, Dünya Sağlık Örgütü'nün aynı yaş ve cinsiyetteki milyonlarca çocuktan topladığı büyüme verilerine dayanır. P50 çizgisi ortalamayı, diğerleri (P3–P97) normal aralığın alt ve üst sınırlarını gösterir. Bebeğinizin kendi çizgisi bu bantların içinde ilerliyorsa büyümesi kendi eğrisinde devam ediyor demektir. Tek bir ölçüm değil, zaman içindeki eğilim önemlidir. Endişeleriniz varsa çocuk doktorunuza danışın."
           }
         }
       }
     },
-    "Try a different filter or clear them.": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Farklı bir filtre deneyin veya filtreleri temizleyin."
+    "This %@ record will be deleted." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bu %@ kaydı silinecek."
           }
         }
       }
     },
-    "Type": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tür"
+    "This photo could not be loaded." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bu fotoğraf yüklenemedi."
           }
         }
       }
     },
-    "Vaccine name": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aşı adı"
+    "Time" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saat"
           }
         }
       }
     },
-    "Vaccine schedule": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aşı Takvimi"
+    "times" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "kez"
           }
         }
       }
     },
-    "Vaccines": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aşılar"
+    "Timing (optional)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zamanlama (opsiyonel)"
           }
         }
       }
     },
-    "Value": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Değer"
+    "Today" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bugün"
           }
         }
       }
     },
-    "Varicella (dose 1)": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Suçiçeği (1. doz)"
+    "Today at a glance" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bugün bir bakışta"
           }
         }
       }
     },
-    "View": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Görüntüle"
+    "Today, %@" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bugün, %@"
           }
         }
       }
     },
-    "Vitamin": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vitamin"
+    "Today's counts. Tap poop, pee or feed to log one." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bugünün sayıları. Kaka, çiş veya mama eklemek için dokun."
           }
         }
       }
     },
-    "WHO percentile curves": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "DSÖ persentil eğrileri"
+    "Track sleep duration" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uyku süresini takip et"
           }
         }
       }
     },
-    "WHO percentile curves (P3–P97)": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "DSÖ persentil eğrileri (P3–P97)"
+    "Tracking made easy" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Günlük takip kolaylaşsın"
           }
         }
       }
     },
-    "Walking independently": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Desteksiz yürüme"
+    "Try a different filter or clear them." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Farklı bir filtre deneyin veya filtreleri temizleyin."
           }
         }
       }
     },
-    "We'll show a notification while your baby sleeps, so you can quickly stop the timer when they wake up.": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bebeğiniz uyurken bir bildirim göstereceğiz, böylece uyandığında zamanlayıcıyı hızlıca durdurabilirsiniz."
+    "Type" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tür"
           }
         }
       }
     },
-    "Week": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hafta"
+    "until %@" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ saatine kadar"
           }
         }
       }
     },
-    "Weight": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kilo"
+    "Vaccine name" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aşı adı"
           }
         }
       }
     },
-    "Weight (kg)": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kilo (kg)"
+    "Vaccine schedule" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aşı Takvimi"
           }
         }
       }
     },
-    "Weight, height and head circumference": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kilo, boy ve baş çevresi"
+    "Vaccines" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aşılar"
           }
         }
       }
     },
-    "Welcome": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hoş geldin"
+    "Value" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Değer"
           }
         }
       }
     },
-    "What do you want to log?": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ne kaydetmek istersin?"
+    "Varicella (dose 1)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suçiçeği (1. doz)"
           }
         }
       }
     },
-    "What's your baby's name?": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bebeğinin adı ne?"
+    "View" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Görüntüle"
           }
         }
       }
     },
-    "When did sleep end?": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uyku ne zaman bitti?"
+    "Vitamin" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vitamin"
           }
         }
       }
     },
-    "When did the sleep start?": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uyku ne zaman başladı?"
+    "Walking independently" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desteksiz yürüme"
           }
         }
       }
     },
-    "When was the feed?": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mama ne zaman verildi?"
+    "We'll show a notification while your baby sleeps, so you can quickly stop the timer when they wake up." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bebeğiniz uyurken bir bildirim göstereceğiz, böylece uyandığında zamanlayıcıyı hızlıca durdurabilirsiniz."
           }
         }
       }
     },
-    "When was the medicine given?": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "İlaç ne zaman verildi?"
+    "Week" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hafta"
           }
         }
       }
     },
-    "When was the pee?": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Çiş ne zaman oldu?"
+    "Weight" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kilo"
           }
         }
       }
     },
-    "When was the poop?": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kaka ne zaman oldu?"
+    "Weight (kg)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kilo (kg)"
           }
         }
       }
     },
-    "When was the temperature taken?": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ateş ne zaman ölçüldü?"
+    "Weight, height and head circumference" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kilo, boy ve baş çevresi"
           }
         }
       }
     },
-    "When was the vitamin given?": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vitamin ne zaman verildi?"
+    "Welcome" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hoş geldin"
           }
         }
       }
     },
-    "Yesterday": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dün"
+    "What do you want to log?" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ne kaydetmek istersin?"
           }
         }
       }
     },
-    "You can add the birth date and gender later in Settings.": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Doğum tarihi ve cinsiyeti daha sonra Ayarlar'dan ekleyebilirsin."
+    "What's your baby's name?" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bebeğinin adı ne?"
           }
         }
       }
     },
-    "e.g. 120": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Örn. 120"
+    "When did sleep end?" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uyku ne zaman bitti?"
           }
         }
       }
     },
-    "e.g. 38.2": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Örn. 38.2"
+    "When did the sleep start?" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uyku ne zaman başladı?"
           }
         }
       }
     },
-    "e.g. Every autumn": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "örn. Her yıl sonbahar"
+    "When was the feed?" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mama ne zaman verildi?"
           }
         }
       }
     },
-    "e.g. First laugh": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "örn. İlk kahkaha"
+    "When was the medicine given?" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İlaç ne zaman verildi?"
           }
         }
       }
     },
-    "e.g. Flu shot": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "örn. Grip aşısı"
+    "When was the pee?" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Çiş ne zaman oldu?"
           }
         }
       }
     },
-    "e.g. Months 5-6": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "örn. 5-6. ay"
+    "When was the poop?" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kaka ne zaman oldu?"
           }
         }
       }
     },
-    "e.g. Paracetamol 5ml": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Örn. Parasetamol 5ml"
+    "When was the temperature taken?" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ateş ne zaman ölçüldü?"
           }
         }
       }
     },
-    "e.g. Vitamin D": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Örn. D Vitamini"
+    "When was the vitamin given?" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vitamin ne zaman verildi?"
           }
         }
       }
     },
-    "other": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "diğer"
+    "WHO percentile curves" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DSÖ persentil eğrileri"
           }
         }
       }
     },
-    "times": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "kez"
+    "WHO percentile curves (P3–P97)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DSÖ persentil eğrileri (P3–P97)"
           }
         }
       }
     },
-    "until %@": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ saatine kadar"
+    "Yesterday" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dün"
           }
         }
       }
     },
-    "—": {
-      "localizations": {
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "—"
+    "You can add the birth date and gender later in Settings." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Doğum tarihi ve cinsiyeti daha sonra Ayarlar'dan ekleyebilirsin."
           }
         }
       }
     }
   },
-  "version": "1.0"
+  "version" : "1.0"
 }

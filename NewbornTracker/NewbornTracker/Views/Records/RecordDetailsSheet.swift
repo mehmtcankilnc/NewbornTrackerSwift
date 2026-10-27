@@ -77,7 +77,7 @@ struct RecordDetailsSheet: View {
     private func pickerCard<Content: View>(_ title: LocalizedStringKey, @ViewBuilder content: () -> Content) -> some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(title)
-                .font(.system(size: 12))
+                .scaledFont(size: 12)
                 .foregroundStyle(Color.appMuted)
             content()
                 .labelsHidden()
