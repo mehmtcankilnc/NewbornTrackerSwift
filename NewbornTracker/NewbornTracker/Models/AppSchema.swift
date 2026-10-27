@@ -1,6 +1,9 @@
 import SwiftData
 
 enum AppSchema {
+    static let appGroupID = "group.com.mehmtcan.NewbornTracker"
+    static let activeBabyDefaultsKey = "activeBabyID"
+    
     static let models: [any PersistentModel.Type] = [
         Baby.self,
         BabyRecord.self,
@@ -14,7 +17,10 @@ enum AppSchema {
     static func makeContainer(inMemory: Bool = false) throws -> ModelContainer {
         try ModelContainer(
             for: Schema(models),
-            configurations: ModelConfiguration(isStoredInMemoryOnly: inMemory)
+            configurations: ModelConfiguration(
+                isStoredInMemoryOnly: inMemory,
+                groupContainer: .identifier(appGroupID)
+            )
         )
     }
 }

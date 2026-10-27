@@ -246,10 +246,14 @@ private struct HomeContent: View {
         case .startSleep(let startedAt):
             baby.activeSleep = ActiveSleep(startedAt: startedAt, notificationID: nil)
             Task { await announceSleep(startedAt) }
+            if notificationsEnabled {
+                Task { await SleepLiveActivity.start(babyID: baby.id, babyName: baby.name, startedAt: startedAt) }
+            }
         case .finishSleep(let endedAt):
             let notificationID = baby.activeSleep?.notificationID
             context.finishSleep(of: baby, endedAt: endedAt)
             notifications.dismiss(notificationID)
+            Task { await SleepLiveActivity.end() }
         }
     }
     

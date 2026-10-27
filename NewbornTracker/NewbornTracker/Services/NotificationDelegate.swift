@@ -37,6 +37,7 @@ final class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
             // The write itself happens on RecordService's own actor, off the main thread.
             _ = try? await RecordService(modelContainer: container).finishSleep(babyID: babyID)
             center.removeDeliveredNotifications(withIdentifiers: [identifier])
+            await SleepLiveActivity.end()
         case nil:
             break
         }

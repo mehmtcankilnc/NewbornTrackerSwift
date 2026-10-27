@@ -2069,3 +2069,72 @@ struct SettingsLogicTests {
         #expect(savedAda.activeSleep == nil)
     }
 }
+
+@MainActor
+struct WidgetSnapshotTests {
+    @Test func countsOnlyTodaysRecordsOfTheMainTypes() {
+        let id = UUID()
+        let records = [
+            RecordValue(type: .poop, occurredAt: date(2026, 3, 10, 8, 0)),
+            RecordValue(type: .poop, occurredAt: date(2026, 3, 9, 23, 0)),
+            RecordValue(type: .feed, occurredAt: date(2026, 3, 10, 9, 0)),
+            RecordValue(type: .sleep, occurredAt: date(2026, 3, 10, 1, 0), durationMinutes: 90),
+        ]
+
+        let snapshot = WidgetSnapshot(
+            babyID: id, babyName: "Ada", records: records, sleepStartedAt: nil,
+            now: date(2026, 3, 10, 12, 0), calendar: calendar
+        )
+
+        #expect(snapshot.babyName == "Ada")
+        #expect(snapshot.count(for: .poop) == 1)
+        #expect(snapshot.count(for: .piss) == 0)
+        #expect(snapshot.count(for: .feed) == 1)
+        #expect(snapshot.sleepMinutesToday == 90)
+        #expect(snapshot.sleepStartedAt == nil)
+    }
+
+    @Test func aRunningSleepIsCarriedAlong() {
+        let start = date(2026, 3, 10, 11, 0)
+
+        let snapshot = WidgetSnapshot(
+            babyID: UUID(), babyName: "Ada", records: [], sleepStartedAt: start,
+            now: date(2026, 3, 10, 12, 0), calendar: calendar
+        )
+
+        #expect(snapshot.sleepStartedAt == start)
+    }
+
+    @Test func serviceReadsTheActiveBabyFromTheStore() async throws {
+        let container = try makeContainer()
+        let ada = Baby(name: "Ada", createdAt: date(2026, 1, 1))
+        let bob = Baby(name: "Bob", createdAt: date(2026, 1, 2))
+        container.mainContext.insert(ada)
+        container.mainContext.insert(bob)
+        let record = BabyRecord(type: .piss, occurredAt: .now)
+        container.mainContext.insert(record)
+        record.baby = bob
+        bob.activeSleep = ActiveSleep(startedAt: .now, notificationID: nil)
+        try container.mainContext.save()
+        let bobID = bob.id
+
+        let service = WidgetDataService(modelContainer: container)
+        let forBob = try await service.snapshot(activeBabyID: bobID)
+        let fallback = try await service.snapshot(activeBabyID: nil)
+
+        #expect(forBob.babyName == "Bob")
+        #expect(forBob.count(for: .piss) == 1)
+        #expect(forBob.sleepStartedAt != nil)
+        #expect(fallback.babyName == "Ada")
+        #expect(fallback.count(for: .piss) == 0)
+    }
+
+    @Test func noBabiesGivesAnEmptySnapshot() async throws {
+        let container = try makeContainer()
+
+        let snapshot = try await WidgetDataService(modelContainer: container).snapshot(activeBabyID: nil)
+
+        #expect(snapshot == .empty)
+        #expect(snapshot.babyID == nil)
+    }
+}

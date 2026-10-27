@@ -1,4 +1,4 @@
-enum RecordType: String, Codable, CaseIterable, Identifiable {
+nonisolated enum RecordType: String, Codable, CaseIterable, Identifiable {
     case poop, piss, feed, sleep, fever, medicine, vitamin
 
     var id: String { rawValue }

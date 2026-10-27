@@ -4,12 +4,12 @@ import Observation
 /// Remembers which baby the app is showing. Only the id is stored; the babies live in SwiftData.
 @Observable
 final class ActiveBabyStore {
-    static let defaultsKey = "activeBabyID"
+    static let defaultsKey = AppSchema.activeBabyDefaultsKey
 
     private let defaults: UserDefaults
     private(set) var activeBabyID: UUID?
 
-    init(defaults: UserDefaults = .standard) {
+    init(defaults: UserDefaults = UserDefaults(suiteName: AppSchema.appGroupID) ?? .standard) {
         self.defaults = defaults
         self.activeBabyID = defaults.string(forKey: Self.defaultsKey).flatMap(UUID.init(uuidString:))
     }
