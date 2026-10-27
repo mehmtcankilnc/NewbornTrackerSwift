@@ -19,4 +19,7 @@ extension Color {
     // Vaccine shortcut card (not a loggable record type)
     static let appVaccine = Color(light: Color(hex: "#2E7D6B"), dark: Color(hex: "#6FBFA8"))
     static let appVaccineBg = Color(light: Color(hex: "#DCEEE8"), dark: Color(hex: "#1B2A26"))
+    
+    /// Raised surfaces such as cards: white in light mode, the elevated tone in dark mode.
+    static let appCard = Color(light: .white, dark: Color(hex: "#2A2721"))
 }

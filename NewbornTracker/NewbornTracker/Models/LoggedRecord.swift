@@ -4,6 +4,7 @@ import Foundation
 protocol LoggedRecord {
     var type: RecordType { get }
     var occurredAt: Date { get }
+    var endedAt: Date? { get }
     var durationMinutes: Int? { get }
 }
 

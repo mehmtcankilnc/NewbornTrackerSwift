@@ -689,3 +689,384 @@ struct RecordServiceTests {
         }
     }
 }
+
+@MainActor
+struct HomeSummaryTests {
+    private var now: Date { date(2026, 3, 10, 14, 0) }
+
+    @Test func lastTimeComesFromTheLatestRecordNotTheListOrder() {
+        let records = [
+            RecordValue(type: .poop, occurredAt: date(2026, 3, 10, 8, 0)),
+            RecordValue(type: .poop, occurredAt: date(2026, 3, 10, 12, 0)),
+            RecordValue(type: .poop, occurredAt: date(2026, 3, 9, 20, 0)),
+        ]
+
+        let summary = HomeSummary(records: records, now: now, calendar: calendar)
+
+        #expect(summary.lastTime(for: .poop) == date(2026, 3, 10, 12, 0))
+        #expect(summary.count(for: .poop) == 2)
+    }
+
+    @Test func lastTimeLooksAtAllDaysButCountsOnlyToday() {
+        let records = [RecordValue(type: .feed, occurredAt: date(2026, 3, 5, 9, 0))]
+
+        let summary = HomeSummary(records: records, now: now, calendar: calendar)
+
+        #expect(summary.count(for: .feed) == 0)
+        #expect(summary.lastTime(for: .feed) == date(2026, 3, 5, 9, 0))
+    }
+
+    @Test func lastSleepTimeIsWhenItEnded() {
+        let records = [
+            RecordValue(type: .sleep, occurredAt: date(2026, 3, 10, 1, 0), endedAt: date(2026, 3, 10, 2, 30), durationMinutes: 90),
+        ]
+
+        let summary = HomeSummary(records: records, now: now, calendar: calendar)
+
+        #expect(summary.lastTime(for: .sleep) == date(2026, 3, 10, 2, 30))
+        #expect(summary.sleepMinutes == 90)
+    }
+
+    @Test func healthSummaryCombinesTheThreeHealthTypes() {
+        let records = [
+            RecordValue(type: .fever, occurredAt: date(2026, 3, 10, 7, 0)),
+            RecordValue(type: .medicine, occurredAt: date(2026, 3, 10, 9, 0)),
+            RecordValue(type: .vitamin, occurredAt: date(2026, 3, 9, 9, 0)),
+            RecordValue(type: .poop, occurredAt: date(2026, 3, 10, 13, 0)),
+        ]
+
+        let summary = HomeSummary(records: records, now: now, calendar: calendar)
+
+        #expect(summary.healthCountToday == 2)
+        #expect(summary.lastHealthTime == date(2026, 3, 10, 9, 0))
+    }
+
+    @Test func emptyRecordsGiveEmptySummary() {
+        let summary = HomeSummary(records: [RecordValue](), now: now, calendar: calendar)
+
+        #expect(summary.lastTime(for: .poop) == nil)
+        #expect(summary.lastHealthTime == nil)
+        #expect(summary.healthCountToday == 0)
+    }
+}
+
+@MainActor
+struct DetailsInputTests {
+    private let moment = date(2026, 3, 10, 9, 0)
+
+    @Test func feedNeedsAtLeastOneSubtype() {
+        let input = FeedDetailsInput()
+
+        #expect(!input.canSave)
+        #expect(input.draft(at: moment) == nil)
+    }
+
+    @Test func feedDraftKeepsSubtypeOrderAndParsesAmount() {
+        var input = FeedDetailsInput(amountText: " 90 ")
+        input.toggle(.extraFormula)
+        input.toggle(.breastfeeding)
+
+        let draft = input.draft(at: moment)
+
+        #expect(draft?.feedSubtypes == [.breastfeeding, .extraFormula])
+        #expect(draft?.amountMl == 90)
+        #expect(draft?.type == .feed)
+    }
+
+    @Test func togglingTwiceRemovesTheSubtype() {
+        var input = FeedDetailsInput()
+        input.toggle(.breastfeeding)
+        input.toggle(.breastfeeding)
+
+        #expect(input.subtypes.isEmpty)
+    }
+
+    @Test(arguments: ["", "abc", "0", "-5", "9.5"])
+    func invalidAmountIsIgnoredButFeedStillSaves(text: String) {
+        var input = FeedDetailsInput(amountText: text)
+        input.toggle(.breastfeeding)
+
+        #expect(input.amountMl == nil)
+        #expect(input.draft(at: moment)?.amountMl == nil)
+    }
+
+    @Test(arguments: [("38.5", 38.5), ("38,5", 38.5), (" 37 ", 37.0)])
+    func feverAcceptsCommaAndDotDecimals(text: String, expected: Double) {
+        let input = HealthDetailsInput(type: .fever, temperatureText: text)
+
+        #expect(input.temperatureC == expected)
+        #expect(input.draft(at: moment)?.temperatureC == expected)
+    }
+
+    @Test(arguments: ["", "hot", "0", "-1", "inf", "nan"])
+    func feverRejectsInvalidTemperature(text: String) {
+        let input = HealthDetailsInput(type: .fever, temperatureText: text)
+
+        #expect(!input.canSave)
+        #expect(input.draft(at: moment) == nil)
+    }
+
+    @Test func medicineNeedsATrimmedNote() {
+        #expect(HealthDetailsInput(type: .medicine, noteText: "   ").draft(at: moment) == nil)
+
+        let draft = HealthDetailsInput(type: .medicine, noteText: "  Paracetamol 5ml ").draft(at: moment)
+
+        #expect(draft?.note == "Paracetamol 5ml")
+        #expect(draft?.temperatureC == nil)
+    }
+
+    @Test func vitaminIgnoresTheTemperatureField() {
+        let input = HealthDetailsInput(type: .vitamin, temperatureText: "38", noteText: "D3")
+
+        #expect(input.draft(at: moment)?.temperatureC == nil)
+        #expect(input.draft(at: moment)?.note == "D3")
+    }
+}
+
+@MainActor
+struct SleepTimerTests {
+    private let start = date(2026, 3, 10, 1, 0)
+
+    @Test func elapsedMinutesRoundToTheNearestMinute() {
+        let sleep = ActiveSleep(startedAt: start, notificationID: nil)
+
+        #expect(SleepTimer.elapsedMinutes(of: sleep, now: start.addingTimeInterval(89 * 60 + 20)) == 89)
+        #expect(SleepTimer.elapsedMinutes(of: sleep, now: start.addingTimeInterval(89 * 60 + 40)) == 90)
+    }
+
+    @Test func elapsedMinutesNeverGoNegative() {
+        let sleep = ActiveSleep(startedAt: start, notificationID: nil)
+
+        #expect(SleepTimer.elapsedMinutes(of: sleep, now: start.addingTimeInterval(-300)) == 0)
+    }
+
+    @Test func finishedDraftHasStartEndAndDuration() {
+        let sleep = ActiveSleep(startedAt: start, notificationID: nil)
+
+        let draft = SleepTimer.finishedDraft(for: sleep, endedAt: date(2026, 3, 10, 2, 30))
+
+        #expect(draft.type == .sleep)
+        #expect(draft.occurredAt == start)
+        #expect(draft.endedAt == date(2026, 3, 10, 2, 30))
+        #expect(draft.durationMinutes == 90)
+    }
+
+    @Test func aVeryShortSleepStillLastsOneMinute() {
+        let sleep = ActiveSleep(startedAt: start, notificationID: nil)
+
+        #expect(SleepTimer.finishedDraft(for: sleep, endedAt: start).durationMinutes == 1)
+    }
+}
+
+@MainActor
+struct RecordWritingTests {
+    @Test func insertedDraftBecomesARecordOfTheBaby() throws {
+        let container = try makeContainer()
+        let baby = Baby(name: "Ada")
+        container.mainContext.insert(baby)
+        let draft = RecordDraft(type: .feed, occurredAt: date(2026, 3, 10, 9, 0), feedSubtypes: [.breastfeeding], amountMl: 90)
+
+        container.mainContext.insertRecord(draft, for: baby)
+        try container.mainContext.save()
+
+        let stored = try ModelContext(container).fetch(FetchDescriptor<BabyRecord>())
+        #expect(stored.count == 1)
+        #expect(stored.first?.amountMl == 90)
+        #expect(stored.first?.feedSubtypes == [.breastfeeding])
+        #expect(stored.first?.baby?.name == "Ada")
+    }
+
+    @Test func finishingASleepSavesARecordAndClearsTheActiveSleep() throws {
+        let container = try makeContainer()
+        let baby = Baby(name: "Ada")
+        container.mainContext.insert(baby)
+        baby.activeSleep = ActiveSleep(startedAt: date(2026, 3, 10, 1, 0), notificationID: "n-1")
+
+        let record = container.mainContext.finishSleep(of: baby, endedAt: date(2026, 3, 10, 2, 30))
+
+        #expect(baby.activeSleep == nil)
+        #expect(record?.durationMinutes == 90)
+        #expect(record?.endedAt == date(2026, 3, 10, 2, 30))
+        #expect(baby.records.count == 1)
+    }
+
+    @Test func finishingWithoutAnActiveSleepDoesNothing() throws {
+        let container = try makeContainer()
+        let baby = Baby(name: "Ada")
+        container.mainContext.insert(baby)
+
+        #expect(container.mainContext.finishSleep(of: baby) == nil)
+        #expect(baby.records.isEmpty)
+    }
+}
+
+@MainActor
+struct HomeViewModelTests {
+    private let moment = date(2026, 3, 10, 9, 0)
+
+    @Test(arguments: [RecordType.poop, .piss])
+    func simpleTypesSaveRightAfterThePickedTime(type: RecordType) {
+        let viewModel = HomeViewModel()
+        viewModel.cardTapped(type, isSleeping: false)
+        #expect(viewModel.sheet == .time(type))
+
+        let action = viewModel.timePicked(moment)
+
+        #expect(action == .save(RecordDraft(type: type, occurredAt: moment)))
+        #expect(viewModel.sheet == nil)
+        #expect(viewModel.toast?.type == type)
+        #expect(viewModel.toast?.time == moment)
+    }
+
+    @Test func feedAsksForDetailsBeforeSaving() {
+        let viewModel = HomeViewModel()
+        viewModel.cardTapped(.feed, isSleeping: false)
+
+        #expect(viewModel.timePicked(moment) == nil)
+        #expect(viewModel.sheet == .feedDetails(occurredAt: moment))
+        #expect(viewModel.toast == nil)
+
+        var input = FeedDetailsInput(amountText: "80")
+        input.toggle(.extraFormula)
+        let action = viewModel.feedConfirmed(input)
+
+        #expect(action == .save(RecordDraft(type: .feed, occurredAt: moment, feedSubtypes: [.extraFormula], amountMl: 80)))
+        #expect(viewModel.sheet == nil)
+        #expect(viewModel.toast?.type == .feed)
+    }
+
+    @Test func invalidFeedDetailsKeepTheSheetOpen() {
+        let viewModel = HomeViewModel()
+        viewModel.cardTapped(.feed, isSleeping: false)
+        _ = viewModel.timePicked(moment)
+
+        #expect(viewModel.feedConfirmed(FeedDetailsInput()) == nil)
+        #expect(viewModel.sheet == .feedDetails(occurredAt: moment))
+    }
+
+    @Test func healthFlowGoesPickerThenTimeThenDetails() {
+        let viewModel = HomeViewModel()
+
+        viewModel.healthCardTapped()
+        #expect(viewModel.sheet == .healthPicker)
+
+        viewModel.healthTypePicked(.fever)
+        #expect(viewModel.sheet == .time(.fever))
+
+        #expect(viewModel.timePicked(moment) == nil)
+        #expect(viewModel.sheet == .healthDetails(type: .fever, occurredAt: moment))
+
+        let action = viewModel.healthConfirmed(HealthDetailsInput(type: .fever, temperatureText: "38,2"))
+
+        #expect(action == .save(RecordDraft(type: .fever, occurredAt: moment, temperatureC: 38.2)))
+        #expect(viewModel.sheet == nil)
+    }
+
+    @Test func invalidHealthDetailsKeepTheSheetOpen() {
+        let viewModel = HomeViewModel()
+        viewModel.healthTypePicked(.medicine)
+        _ = viewModel.timePicked(moment)
+
+        #expect(viewModel.healthConfirmed(HealthDetailsInput(type: .medicine, noteText: " ")) == nil)
+        #expect(viewModel.sheet == .healthDetails(type: .medicine, occurredAt: moment))
+    }
+
+    @Test func sleepStartsFromTheTimePicker() {
+        let viewModel = HomeViewModel()
+        viewModel.cardTapped(.sleep, isSleeping: false)
+
+        #expect(viewModel.sheet == .time(.sleep))
+        #expect(viewModel.timePicked(moment) == .startSleep(at: moment))
+        #expect(viewModel.sheet == nil)
+        #expect(viewModel.toast == nil)
+    }
+
+    @Test func tappingTheSleepCardWhileSleepingOffersToStop() {
+        let viewModel = HomeViewModel()
+        viewModel.cardTapped(.sleep, isSleeping: true)
+
+        #expect(viewModel.sheet == .stopSleep)
+        #expect(viewModel.stopSleepConfirmed(at: moment) == .finishSleep(at: moment))
+        #expect(viewModel.sheet == nil)
+    }
+
+    @Test func dismissingClosesTheSheetWithoutSaving() {
+        let viewModel = HomeViewModel()
+        viewModel.cardTapped(.poop, isSleeping: false)
+
+        viewModel.dismiss()
+
+        #expect(viewModel.sheet == nil)
+        #expect(viewModel.toast == nil)
+    }
+
+    @Test func stepsOutOfOrderDoNothing() {
+        let viewModel = HomeViewModel()
+
+        #expect(viewModel.timePicked(moment) == nil)
+        #expect(viewModel.feedConfirmed(FeedDetailsInput(subtypes: [.breastfeeding])) == nil)
+        #expect(viewModel.healthConfirmed(HealthDetailsInput(type: .fever, temperatureText: "38")) == nil)
+        #expect(viewModel.stopSleepConfirmed() == nil)
+        #expect(viewModel.sheet == nil)
+    }
+
+    @Test func eachSavedToastHasItsOwnIdentity() {
+        let viewModel = HomeViewModel()
+        viewModel.cardTapped(.poop, isSleeping: false)
+        _ = viewModel.timePicked(moment)
+        let first = viewModel.toast
+
+        viewModel.cardTapped(.poop, isSleeping: false)
+        _ = viewModel.timePicked(moment)
+
+        #expect(viewModel.toast != first)
+        viewModel.clearToast()
+        #expect(viewModel.toast == nil)
+    }
+}
+
+@MainActor
+struct TimeSelectionTests {
+    private var now: Date { date(2026, 3, 10, 14, 0) }
+
+    @Test func quickSelectionSubtractsMinutes() {
+        #expect(TimeSelection.quick(minutesAgo: 0).resolved(now: now, calendar: calendar) == now)
+        #expect(TimeSelection.quick(minutesAgo: 30).resolved(now: now, calendar: calendar) == date(2026, 3, 10, 13, 30))
+    }
+
+    @Test func customSelectionUsesTodayWithThePickedTime() {
+        let picked = date(2000, 1, 1, 9, 30)
+
+        #expect(TimeSelection.custom(picked).resolved(now: now, calendar: calendar) == date(2026, 3, 10, 9, 30))
+    }
+
+    @Test func customTimeLaterThanNowMeansYesterday() {
+        let picked = date(2000, 1, 1, 23, 0)
+
+        #expect(TimeSelection.custom(picked).resolved(now: now, calendar: calendar) == date(2026, 3, 9, 23, 0))
+    }
+}
+
+@MainActor
+struct BabyInputTests {
+    @Test func blankNameCannotBeSaved() {
+        #expect(!BabyInput().canSave)
+        #expect(BabyInput(name: "   ").makeBaby() == nil)
+    }
+
+    @Test func nameIsTrimmed() {
+        #expect(BabyInput(name: "  Ada ").makeBaby()?.name == "Ada")
+    }
+
+    @Test func birthDateIsOnlyKeptWhenEnabled() {
+        let birth = date(2026, 1, 5)
+
+        #expect(BabyInput(name: "Ada", hasBirthDate: false, birthDate: birth).makeBaby()?.birthDate == nil)
+        #expect(BabyInput(name: "Ada", hasBirthDate: true, birthDate: birth).makeBaby()?.birthDate == birth)
+    }
+
+    @Test func genderIsOptional() {
+        #expect(BabyInput(name: "Ada").makeBaby()?.gender == nil)
+        #expect(BabyInput(name: "Ada", gender: .female).makeBaby()?.gender == .female)
+    }
+}

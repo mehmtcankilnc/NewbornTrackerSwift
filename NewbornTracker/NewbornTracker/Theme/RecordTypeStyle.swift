@@ -65,3 +65,22 @@ extension RecordType {
         }
     }
 }
+
+extension FeedSubtype {
+    var title: LocalizedStringResource {
+        switch self {
+        case .breastfeeding: "Breastfeeding"
+        case .extraBreastMilk: "Extra breast milk"
+        case .extraFormula: "Extra formula"
+        }
+    }
+}
+
+extension Gender {
+    var title: LocalizedStringResource {
+        switch self {
+        case .male: "Boy"
+        case .female: "Girl"
+        }
+    }
+}
